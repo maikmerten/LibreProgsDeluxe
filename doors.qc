@@ -684,6 +684,7 @@ void () fd_secret_done =
 		self.health = 10000;
 		self.takedamage = DAMAGE_YES;
 		self.th_pain = fd_secret_use;	
+		self.th_die = fd_secret_use;//copypasta'd directly from gpl'd qw source on github.
 	}
 	sound(self, CHAN_VOICE, self.noise3, 1, ATTN_NORM);
 };

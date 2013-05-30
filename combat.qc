@@ -127,6 +127,10 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	if (!targ.takedamage)
 		return;
 
+	//gnounc
+	if (targ.classname == "monster_oldone" && damage < 9999)
+		return;
+
 // used by buttons and triggers to set activator for target firing
 	damage_attacker = attacker;
 

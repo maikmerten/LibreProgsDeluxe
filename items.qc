@@ -381,6 +381,23 @@ float(float w) RankForWeapon =
 	return 7;
 };
 
+float (float w) WeaponCode = //copypasta'd directly from gpl'd qw source on github.
+{
+	if (w == IT_SUPER_SHOTGUN)
+		return 3;
+	if (w == IT_NAILGUN)
+		return 4;
+	if (w == IT_SUPER_NAILGUN)
+		return 5;
+	if (w == IT_GRENADE_LAUNCHER)
+		return 6;
+	if (w == IT_ROCKET_LAUNCHER)
+		return 7;
+	if (w == IT_LIGHTNING)
+		return 8;
+	return 1;
+};
+
 /*
 =============
 Deathmatch_Weapon
@@ -659,7 +676,8 @@ local float		best;
 //	cells
 	if (self.weapon == 4)
 	{
-		if (other.ammo_cells >= 200)
+		if (other.ammo_cells >= 100)	//copypasta'd directly from gpl'd qw source on github.
+//		if (other.ammo_cells >= 200)
 			return;
 		other.ammo_cells = other.ammo_cells + self.aflag;
 	}
@@ -1241,18 +1259,80 @@ PLAYER BACKPACKS
 ===============================================================================
 */
 
+//the entirety of BackpackTouch
+//copypasta'd directly from gpl'd qw source on github.
 void() BackpackTouch =
 {
-	local string	s;
-	local	float	best;
-	local		entity	stemp;
-	
+	local string    s;
+	local   float   best, old, new;
+	local           entity  stemp;
+	local   float   acount;
+//	local   float   b_switch;
+/*
+	if (deathmatch == 4)
+		if (other.invincible_time > 0)
+			return;
+
+	if ((stof(infokey(other,"b_switch"))) == 0)
+		b_switch = 8;
+	else
+		b_switch = stof(infokey(other,"b_switch"));
+*/	
 	if (other.classname != "player")
 		return;
 	if (other.health <= 0)
 		return;
 		
-// if the player was using his best weapon, change up to the new one if better		
+	acount = 0;
+//	sprint (other, PRINT_LOW, "You get ");
+ 	sprint (other, "You get ");//Netquake does not support print_low
+
+/*	if (deathmatch == 4)			//no additional deathmatch support either
+//	{       
+		other.health = other.health + 10;
+		sprint (other, PRINT_LOW, "10 additional health\n");
+		if ((other.health > 250) && (other.health < 300))
+			sound (other, CHAN_ITEM, "items/protect3.wav", 1, ATTN_NORM);
+		else
+			sound (other, CHAN_ITEM, "weapons/lock4.wav", 1, ATTN_NORM);
+		stuffcmd (other, "bf\n");
+		remove(self);
+
+		if (other.health >299)
+		{               
+			if (other.invincible_time != 1)
+			{                       
+				other.invincible_time = 1;
+				other.invincible_finished = time + 30;
+				other.items = other.items | IT_INVULNERABILITY;
+				
+				other.super_time = 1;
+				other.super_damage_finished = time + 30;
+				other.items = other.items | IT_QUAD;
+
+				other.ammo_cells = 0;		
+		
+	
+				sound (other, CHAN_VOICE, "boss1/sight1.wav", 1, ATTN_NORM);
+				stuffcmd (other, "bf\n");               
+				bprint (PRINT_HIGH, other.netname);
+				bprint (PRINT_HIGH, " attains bonus powers!!!\n");
+			}
+		}
+		self = other;
+		return;
+	}	*/ //still deathmatch 4 stuff
+	if (self.items)
+		if ((other.items & self.items) == 0)
+		{
+			acount = 1;
+//			sprint (other, PRINT_LOW, "the ");	//nq does not support
+//			sprint (other, PRINT_LOW, self.netname);	// print_low
+			sprint (other, "the ");
+			sprint (other, self.netname);
+		}
+ 
+// if the player was using his best weapon, change up to the new one if better          
 	stemp = self;
 	self = other;
 	best = W_BestWeapon();
@@ -1264,56 +1344,97 @@ void() BackpackTouch =
 	other.ammo_rockets = other.ammo_rockets + self.ammo_rockets;
 	other.ammo_cells = other.ammo_cells + self.ammo_cells;
 
+	new = self.items;
+	if (!new)
+		new = other.weapon;
+	old = other.items;
 	other.items = other.items | self.items;
 	
 	bound_other_ammo ();
 
-	sprint (other, "You get ");
-
 	if (self.ammo_shells)
 	{
+		if (acount)
+//			sprint(other, PRINT_LOW, ", ");
+			sprint(other, ", ");	//nq does not support print_low
+		acount = 1;
 		s = ftos(self.ammo_shells);
+//		sprint (other, PRINT_LOW, s);		//nq does not support printlow
+//		sprint (other, PRINT_LOW, " shells"); //nq does not support printlow
 		sprint (other, s);
-		sprint (other, " shells  ");
+		sprint (other, " shells");
 	}
 	if (self.ammo_nails)
 	{
+		if (acount)
+//			sprint(other, PRINT_LOW, ", ");
+			sprint(other, ", ");
+		acount = 1;
 		s = ftos(self.ammo_nails);
+//		sprint (other, PRINT_LOW, s);			//nq does not support printlow
+//		sprint (other, PRINT_LOW, " nails");	//nq does not support printlow
 		sprint (other, s);
-		sprint (other, " nails ");
+		sprint (other, " nails");
 	}
 	if (self.ammo_rockets)
 	{
+		if (acount)
+//			sprint(other, PRINT_LOW, ", ");	//nq does not support print_low
+			sprint(other, ", ");
+		acount = 1;
 		s = ftos(self.ammo_rockets);
+//		sprint (other, PRINT_LOW, s);	//nq does not support print_low		
+//		sprint (other, PRINT_LOW, " rockets");	//nq does not support print_low
 		sprint (other, s);
-		sprint (other, " rockets  ");
+		sprint (other, " rockets");
 	}
 	if (self.ammo_cells)
 	{
+		if (acount)
+//			sprint(other, PRINT_LOW, ", ");		//nq does not support print_low
+			sprint(other, ", ");
+		acount = 1;
 		s = ftos(self.ammo_cells);
+//		sprint (other, PRINT_LOW, s);	//nq does not support print_low
+//		sprint (other,PRINT_LOW, " cells");	//nq does not support print_low
 		sprint (other, s);
-		sprint (other, " cells  ");
+//		sprint (other,PRINT_LOW, " cells");	//nq does not support print_low
+		sprint (other, " cells");
 	}
 	
+//	if ( (deathmatch==3 || deathmatch == 5) & ( (WeaponCode(new)==6) || (WeaponCode(new)==7) ) & (other.ammo_rockets < 5) )
+//		other.ammo_rockets = 5;
+
+//	sprint (other, PRINT_LOW, "\n");	//nq does not support print low
 	sprint (other, "\n");
+
 // backpack touch sound
 	sound (other, CHAN_ITEM, "weapons/lock4.wav", 1, ATTN_NORM);
 	stuffcmd (other, "bf\n");
 
-// change to a better weapon if appropriate
-	if ( other.weapon == best )
-	{
-		stemp = self;
-		self = other;
-		self.weapon = W_BestWeapon();
-		self = stemp;
-	}
-
-	
 	remove(self);
-	
 	self = other;
+	
+// change to the weapon
+	
+	
+//	if ( WeaponCode(new) <= b_switch )
+//	{
+		if (self.flags & FL_INWATER)
+		{
+			if (new != IT_LIGHTNING)
+			{
+				Deathmatch_Weapon (old, new);
+			}
+		}
+		else
+		{                
+			Deathmatch_Weapon (old, new);
+		}
+//	}
+
 	W_SetCurrentAmmo ();
+
 };
 
 

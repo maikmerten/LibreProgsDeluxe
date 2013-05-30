@@ -57,6 +57,7 @@ void() W_FireAxe =
 	local	vector	source;
 	local	vector	org;
 
+	makevectors (self.v_angle);//copypasta'd directly from gpl'd qw source on github.
 	source = self.origin + '0 0 16';
 	traceline (source, source + v_forward*64, FALSE, self);
 	if (trace_fraction == 1.0)
@@ -480,6 +481,7 @@ void(vector p1, vector p2, entity from, float damage) LightningDamage =
 void() W_FireLightning =
 {
 	local	vector		org;
+	local   float           cells;//copypasta'd directly from gpl'd qw source on github.
 
 	if (self.ammo_cells < 1)
 	{
@@ -490,10 +492,12 @@ void() W_FireLightning =
 
 // explode if under water
 	if (self.waterlevel > 1)
-	{
-		T_RadiusDamage (self, self, 35*self.ammo_cells, world);
+	{//copypasta'd directly from gpl'd qw source on github.
+		cells = self.ammo_cells;
 		self.ammo_cells = 0;
 		W_SetCurrentAmmo ();
+//		T_RadiusDamage (self, self, 35*cells, world, "");
+		T_RadiusDamage (self, self, 35*cells, world); //nq does not support last parameter
 		return;
 	}
 
@@ -839,7 +843,8 @@ float() W_BestWeapon =
 	
 	it = self.items;
 
-	if(self.ammo_cells >= 1 && (it & IT_LIGHTNING) )
+	if (self.waterlevel <= 1 && self.ammo_cells >= 1 && (it & IT_LIGHTNING) )//copypasta'd directly from gpl'd qw source on github.
+
 		return IT_LIGHTNING;
 	else if(self.ammo_nails >= 2 && (it & IT_SUPER_NAILGUN) )
 		return IT_SUPER_NAILGUN;
@@ -1261,7 +1266,8 @@ void() ImpulseCommands =
 		CycleWeaponCommand ();
 	if (self.impulse == 11)
 		ServerflagsCommand ();
-
+	if (self.impulse == 12)
+		CycleWeaponReverseCommand();
 	if (self.impulse == 255)
 		QuadCheat ();
 		
