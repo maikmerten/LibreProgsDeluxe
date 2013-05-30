@@ -127,7 +127,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	if (!targ.takedamage)
 		return;
 
-	//gnounc
+	//gnounc -- shub kill crash fix
 	if (targ.classname == "monster_oldone" && damage < 9999)
 		return;
 
