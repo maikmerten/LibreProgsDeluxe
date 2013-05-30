@@ -16,13 +16,11 @@
 
     See file, 'COPYING', for details.
 */
-/*
-==============================================================================
+/*==============================================================================
 
 BOSS-ONE
 
-==============================================================================
-*/
+==============================================================================*/
 $cd /raid/quake/id1/models/boss1
 $origin 0 0 -15
 $base base
@@ -57,23 +55,28 @@ void(vector p) boss_missile;
 
 void() boss_face =
 {
-	
-// go for another player if multi player
+	// go for another player if multi player
 	if (self.enemy.health <= 0 || random() < 0.02)
 	{
 		self.enemy = find(self.enemy, classname, "player");
+
 		if (!self.enemy)
 			self.enemy = find(self.enemy, classname, "player");
 	}
+
 	ai_face();
 };
 
-void() boss_rise1	=[	$rise1, boss_rise2 ] {
-sound (self, CHAN_WEAPON, "boss1/out1.wav", 1, ATTN_NORM);
+void() boss_rise1	=[	$rise1, boss_rise2 ] 
+{
+	sound (self, CHAN_WEAPON, "boss1/out1.wav", 1, ATTN_NORM);
 };
-void() boss_rise2	=[	$rise2, boss_rise3 ] {
-sound (self, CHAN_VOICE, "boss1/sight1.wav", 1, ATTN_NORM);
+
+void() boss_rise2	=[	$rise2, boss_rise3 ] 
+{
+	sound (self, CHAN_VOICE, "boss1/sight1.wav", 1, ATTN_NORM);
 };
+
 void() boss_rise3	=[	$rise3, boss_rise4 ] {};
 void() boss_rise4	=[	$rise4, boss_rise5 ] {};
 void() boss_rise5	=[	$rise5, boss_rise6 ] {};
@@ -182,9 +185,11 @@ void() boss_shockc8 =[	$shockc8, boss_shockc9 ] {};
 void() boss_shockc9 =[	$shockc9, boss_shockc10 ] {};
 void() boss_shockc10 =[	$shockc10, boss_death1 ] {};
 
-void() boss_death1 = [$death1, boss_death2] {
-sound (self, CHAN_VOICE, "boss1/death.wav", 1, ATTN_NORM);
+void() boss_death1 = [$death1, boss_death2] 
+{
+	sound (self, CHAN_VOICE, "boss1/death.wav", 1, ATTN_NORM);
 };
+
 void() boss_death2 = [$death2, boss_death3] {};
 void() boss_death3 = [$death3, boss_death4] {};
 void() boss_death4 = [$death4, boss_death5] {};
@@ -221,7 +226,7 @@ void(vector p) boss_missile =
 
 	org = self.origin + p_x*v_forward + p_y*v_right + p_z*'0 0 1';
 	
-// lead the player on hard mode
+	// lead the player on hard mode
 	if (skill > 1)
 	{
 		t = vlen(self.enemy.origin - org) / 300;
@@ -229,6 +234,7 @@ void(vector p) boss_missile =
 		vec_z = 0;
 		d = self.enemy.origin + t * vec;		
 	}
+
 	else
 	{
 		d = self.enemy.origin;
@@ -244,7 +250,7 @@ void(vector p) boss_missile =
 	newmis.touch = T_MissileTouch; // rocket explosion
 	sound (self, CHAN_WEAPON, "boss1/throw.wav", 1, ATTN_NORM);
 
-// check for dead enemy
+	// check for dead enemy
 	if (self.enemy.health <= 0)
 		boss_idle1 ();
 };
@@ -277,8 +283,7 @@ void() boss_awake =
 };
 
 
-/*QUAKED monster_boss (1 0 0) (-128 -128 -24) (128 128 256)
-*/
+/*QUAKED monster_boss (1 0 0) (-128 -128 -24) (128 128 256)*/
 void() monster_boss =
 {
 	if (deathmatch)
@@ -286,6 +291,7 @@ void() monster_boss =
 		remove(self);
 		return;
 	}
+
 	precache_model ("progs/boss.mdl");
 	precache_model ("progs/lavaball.mdl");
 
@@ -317,6 +323,7 @@ void() lightning_fire =
 		door_go_down ();
 		self = le2;
 		door_go_down ();
+
 		return;
 	}
 	
@@ -355,17 +362,11 @@ void() lightning_use =
 		dprint ("missing lightning targets\n");
 		return;
 	}
-	
-	if (
-	 (le1.state != STATE_TOP && le1.state != STATE_BOTTOM)
-	|| (le2.state != STATE_TOP && le2.state != STATE_BOTTOM)
-	|| (le1.state != le2.state) )
-	{
-//		dprint ("not aligned\n");
+	//someone should probably have commented what this long ass statement means - gnounc.	
+	if ((le1.state != STATE_TOP && le1.state != STATE_BOTTOM) || (le2.state != STATE_TOP && le2.state != STATE_BOTTOM) || (le1.state != le2.state) )
 		return;
-	}
 
-// don't let the electrodes go back up until the bolt is done
+	// don't let the electrodes go back up until the bolt is done
 	le1.nextthink = -1;
 	le2.nextthink = -1;
 	lightning_end = time + 1;
@@ -373,19 +374,25 @@ void() lightning_use =
 	sound (self, CHAN_VOICE, "misc/power.wav", 1, ATTN_NORM);
 	lightning_fire ();		
 
-// advance the boss pain if down
+	// advance the boss pain if down
 	self = find (world, classname, "monster_boss");
+
 	if (!self)
 		return;
+
 	self.enemy = activator;
+
 	if (le1.state == STATE_TOP && self.health > 0)
 	{
 		sound (self, CHAN_VOICE, "boss1/pain.wav", 1, ATTN_NORM);
 		self.health = self.health - 1;
+
 		if (self.health >= 2)
 			boss_shocka1();
+
 		else if (self.health == 1)
 			boss_shockb1();
+
 		else if (self.health == 0)
 			boss_shockc1();
 	}	
@@ -393,8 +400,7 @@ void() lightning_use =
 
 
 /*QUAKED event_lightning (0 1 1) (-16 -16 -16) (16 16 16)
-Just for boss level.
-*/
+Just for boss level.*/
 void() event_lightning =
 {
 	self.use = lightning_use;

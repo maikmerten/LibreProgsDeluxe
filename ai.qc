@@ -31,7 +31,7 @@ Will be world if not currently angry at anyone.
 The next path spot to walk toward.  If .enemy, ignore .movetarget.
 When an enemy is killed, the monster will try to return to it's path.
 
-.huntt_ime
+.hunt_time
 Set to time + something when the player is in sight, but movement straight for
 him is blocked.  This causes the monster to use wall following code for
 movement direction instead of sighting on the player.
@@ -120,7 +120,7 @@ moving towards it, change the next destination and continue.
 */
 void() t_movetarget =
 {
-local entity	temp;
+	local entity	temp;
 
 	if (other.movetarget != self)
 		return;
@@ -163,8 +163,8 @@ returns the range catagorization of an entity reletive to self
 */
 float(entity targ) range =
 {
-local vector	spot1, spot2;
-local float		r;	
+	local vector	spot1, spot2;
+	local float		r;	
 	spot1 = self.origin + self.view_ofs;
 	spot2 = targ.origin + targ.view_ofs;
 	
@@ -225,63 +225,6 @@ float(entity targ) infront =
 	return FALSE;
 };
 
-
-//============================================================================
-
-/*
-===========
-ChangeYaw
-
-Turns towards self.ideal_yaw at self.yaw_speed
-Sets the global variable current_yaw
-Called every 0.1 sec by monsters
-============
-*/
-/*
-
-void() ChangeYaw =
-{
-	local float		ideal, move;
-
-//current_yaw = self.ideal_yaw;
-// mod down the current angle
-	current_yaw = anglemod( self.angles_y );
-	ideal = self.ideal_yaw;
-	
-	if (current_yaw == ideal)
-		return;
-	
-	move = ideal - current_yaw;
-	if (ideal > current_yaw)
-	{
-		if (move > 180)
-			move = move - 360;
-	}
-	else
-	{
-		if (move < -180)
-			move = move + 360;
-	}
-		
-	if (move > 0)
-	{
-		if (move > self.yaw_speed)
-			move = self.yaw_speed;
-	}
-	else
-	{
-		if (move < 0-self.yaw_speed )
-			move = 0-self.yaw_speed;
-	}
-
-	current_yaw = anglemod (current_yaw + move);
-
-	self.angles_y = current_yaw;
-};
-
-*/
-
-
 //============================================================================
 
 void() HuntTarget =
@@ -295,7 +238,7 @@ void() HuntTarget =
 
 void() SightSound =
 {
-local float	rsnd;
+	local float	rsnd;
 
 	if (self.classname == "monster_ogre")	
 		sound (self, CHAN_VOICE, "ogre/ogwake.wav", 1, ATTN_NORM);
@@ -329,6 +272,7 @@ local float	rsnd;
 		else
 			sound (self, CHAN_VOICE, "enforcer/sight4.wav", 1, ATTN_NORM);
 	}
+
 	else if (self.classname == "monster_army")
 		sound (self, CHAN_VOICE, "soldier/sight1.wav", 1, ATTN_NORM);
 	else if (self.classname == "monster_shalrath")
@@ -395,6 +339,7 @@ float() FindTarget =
 
 	if (client.flags & FL_NOTARGET)
 		return FALSE;
+
 	if (client.items & IT_INVISIBILITY)
 		return FALSE;
 
@@ -410,6 +355,7 @@ float() FindTarget =
 		if (client.show_hostile < time && !infront (client))
 			return FALSE;
 	}
+
 	else if (r == RANGE_MID)
 	{
 		if ( /* client.show_hostile < time || */ !infront (client))
@@ -459,14 +405,6 @@ stagger back a bit
 void(float dist) ai_pain =
 {
 	ai_back (dist);
-/*
-	local float	away;
-	
-	away = anglemod (vectoyaw (self.origin - self.enemy.origin) 
-	+ 180*(random()- 0.5) );
-	
-	walkmove (away, dist);
-*/
 };
 
 /*
@@ -733,13 +671,11 @@ void(float dist) ai_run =
 	
 	if (self.attack_state == AS_MISSILE)
 	{
-//dprint ("ai_run_missile\n");
 		ai_run_missile ();
 		return;
 	}
 	if (self.attack_state == AS_MELEE)
 	{
-//dprint ("ai_run_melee\n");
 		ai_run_melee ();
 		return;
 	}

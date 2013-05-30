@@ -127,17 +127,12 @@ void()	Tar_JumpTouch =
 	{
 		if (self.flags & FL_ONGROUND)
 		{	// jump randomly to not get hung up
-//dprint ("popjump\n");
-	self.touch = SUB_Null;
-	self.think = tbaby_run1;
-	self.movetype = MOVETYPE_STEP;
-	self.nextthink = time + 0.1;
-
-//			self.velocity_x = (random() - 0.5) * 600;
-//			self.velocity_y = (random() - 0.5) * 600;
-//			self.velocity_z = 200;
-//			self.flags = self.flags - FL_ONGROUND;
+			self.touch = SUB_Null;
+			self.think = tbaby_run1;
+			self.movetype = MOVETYPE_STEP;
+			self.nextthink = time + 0.1;
 		}
+
 		return;	// not on ground yet
 	}
 
@@ -151,13 +146,14 @@ void()	tbaby_jump5;
 void()	tbaby_fly1		=[	$fly1,	tbaby_fly2	] {};
 void()	tbaby_fly2		=[	$fly2,	tbaby_fly3	] {};
 void()	tbaby_fly3		=[	$fly3,	tbaby_fly4	] {};
-void()	tbaby_fly4		=[	$fly4,	tbaby_fly1	] {
-self.cnt = self.cnt + 1;
-if (self.cnt == 4)
+void()	tbaby_fly4		=[	$fly4,	tbaby_fly1	] 
 {
-//dprint ("spawn hop\n");
-tbaby_jump5 ();
-}
+	self.cnt = self.cnt + 1;
+
+	if (self.cnt == 4)
+	{
+		tbaby_jump5 ();
+	}
 };
 
 void()	tbaby_jump1		=[	$jump1,	tbaby_jump2		] {ai_face();};
@@ -172,19 +168,20 @@ void()	tbaby_jump5		=[	$jump5,	tbaby_jump6		]
 	self.origin_z = self.origin_z + 1;
 	self.velocity = v_forward * 600 + '0 0 200';
 	self.velocity_z = self.velocity_z + random()*150;
+
 	if (self.flags & FL_ONGROUND)
 		self.flags = self.flags - FL_ONGROUND;
+
 	self.cnt = 0;
 };
+
 void()	tbaby_jump6	=[	$jump6,tbaby_fly1	] {};
 
 
 
 //=============================================================================
 
-void()	tbaby_die1	=[	$exp,		tbaby_die2	] {
-self.takedamage = DAMAGE_NO;
-};
+void()	tbaby_die1	=[	$exp,		tbaby_die2	] {self.takedamage = DAMAGE_NO;};
 void()	tbaby_die2	=[	$exp,		tbaby_run1	] 
 {
 	T_RadiusDamage (self, self, 120, world);
@@ -213,6 +210,7 @@ void() monster_tarbaby =
 		remove(self);
 		return;
 	}
+	
 	precache_model2 ("progs/tarbaby.mdl");
 
 	precache_sound2 ("blob/death1.wav");

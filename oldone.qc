@@ -97,7 +97,7 @@ void() old_idle45       =[      $old45, old_idle46      ] {};
 void() old_idle46       =[      $old46, old_idle1       ] {};
 
 
-void() old_thrash1        =[ $shake1,  old_thrash2       ] {lightstyle(0, "m");};
+void() old_thrash1        =[      $shake1,  old_thrash2       ] {lightstyle(0, "m");};
 void() old_thrash2        =[      $shake2,  old_thrash3       ] {lightstyle(0, "k");};
 void() old_thrash3        =[      $shake3,  old_thrash4       ] {lightstyle(0, "k");};
 void() old_thrash4        =[      $shake4,  old_thrash5       ] {lightstyle(0, "i");};
@@ -111,11 +111,14 @@ void() old_thrash11       =[      $shake11, old_thrash12      ] {lightstyle(0, "
 void() old_thrash12       =[      $shake12, old_thrash13      ] {lightstyle(0, "i");};
 void() old_thrash13       =[      $shake13, old_thrash14      ] {lightstyle(0, "k");};
 void() old_thrash14       =[      $shake14, old_thrash15      ] {lightstyle(0, "m");};
-void() old_thrash15       =[      $shake15, old_thrash16      ] {lightstyle(0, "m");
-self.cnt = self.cnt + 1;
-if (self.cnt != 3)
-	self.think = old_thrash1;
+void() old_thrash15       =[      $shake15, old_thrash16      ] 
+{
+	lightstyle(0, "m");
+	self.cnt = self.cnt + 1;
+	if (self.cnt != 3)
+		self.think = old_thrash1;
 };
+
 void() old_thrash16       =[      $shake16, old_thrash17      ] {lightstyle(0, "g");};
 void() old_thrash17       =[      $shake17, old_thrash18      ] {lightstyle(0, "c");};
 void() old_thrash18       =[      $shake18, old_thrash19      ] {lightstyle(0, "b");};
@@ -134,9 +137,12 @@ void() finale_1 =
 
 	// find the intermission spot
 	pos = find (world, classname, "info_intermission");
+
 	if (!pos)
 		error ("no info_intermission");
+
 	pl = find (world, classname, "misc_teleporttrain");
+
 	if (!pl)
 		error ("no teleporttrain");
 	remove (pl);
@@ -145,6 +151,7 @@ void() finale_1 =
 	WriteString (MSG_ALL, "");
 
 	pl = find (world, classname, "player");
+
 	while (pl != world)
 	{
 		pl.view_ofs = '0 0 0';
@@ -222,18 +229,24 @@ void() finale_4 =
 				self.origin_z = oldo_z + z;
 
 				r = random();
+
 				if (r < 0.3)				
 					ThrowGib ("progs/gib1.mdl", -999);
+
 				else if (r < 0.6)
 					ThrowGib ("progs/gib2.mdl", -999);
+
 				else
 					ThrowGib ("progs/gib3.mdl", -999);
 				y = y + 32;
 			}
+
 			x = x + 32;
 		}
+
 		z = z + 96;
 	}
+
 	// start the end text
 	WriteByte (MSG_ALL, SVC_FINALE);
 	WriteString (MSG_ALL, "Congratulations and well done! You have\nbeaten the hideous Shub-Niggurath, and\nher hundreds of ugly changelings and\nmonsters. You have proven that your\nskill and your cunning are greater than\nall the powers of Quake. You are the\nmaster now. Id Software salutes you.");

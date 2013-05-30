@@ -40,17 +40,20 @@ void() monster_use =
 {
 	if (self.enemy)
 		return;
+
 	if (self.health <= 0)
 		return;
+
 	if (activator.items & IT_INVISIBILITY)
 		return;
+
 	if (activator.flags & FL_NOTARGET)
 		return;
+
 	if (activator.classname != "player")
 		return;
 	
-// delay reaction so if the monster is teleported, its sound is still
-// heard
+	// delay reaction so if the monster is teleported, its sound is still heard
 	self.enemy = activator;
 	self.nextthink = time + 0.1;
 	self.think = FoundTarget;
@@ -66,9 +69,10 @@ enemy as activator.
 */
 void() monster_death_use =
 {
-// fall to ground
+	// fall to ground
 	if (self.flags & FL_FLY)
 		self.flags = self.flags - FL_FLY;
+	
 	if (self.flags & FL_SWIM)
 		self.flags = self.flags - FL_SWIM;
 
@@ -97,8 +101,10 @@ void() walkmonster_start_go =
 	self.takedamage = DAMAGE_AIM;
 
 	self.ideal_yaw = self.angles * '0 1 0';
+
 	if (!self.yaw_speed)
 		self.yaw_speed = 20;
+
 	self.view_ofs = '0 0 25';
 	self.use = monster_use;
 	
@@ -108,34 +114,37 @@ void() walkmonster_start_go =
 	{
 		self.goalentity = self.movetarget = find(world, targetname, self.target);
 		self.ideal_yaw = vectoyaw(self.goalentity.origin - self.origin);
+
 		if (!self.movetarget)
 		{
 			dprint ("Monster can't find target at ");
 			dprint (vtos(self.origin));
 			dprint ("\n");
 		}
-// this used to be an objerror
+	// this used to be an objerror
 		if (self.movetarget.classname == "path_corner")
 			self.th_walk ();
+
 		else
 			self.pausetime = 99999999;
 			self.th_stand ();
 	}
+
 	else
 	{
 		self.pausetime = 99999999;
 		self.th_stand ();
 	}
 
-// spread think times so they don't all happen at same time
+	// spread think times so they don't all happen at same time
 	self.nextthink = self.nextthink + random()*0.5;
 };
 
 
 void() walkmonster_start =
 {
-// delay drop to floor to make sure all doors have been spawned
-// spread think times so they don't all happen at same time
+	// delay drop to floor to make sure all doors have been spawned
+	// spread think times so they don't all happen at same time
 	self.nextthink = self.nextthink + random()*0.5;
 	self.think = walkmonster_start_go;
 	total_monsters = total_monsters + 1;
@@ -148,8 +157,10 @@ void() flymonster_start_go =
 	self.takedamage = DAMAGE_AIM;
 
 	self.ideal_yaw = self.angles * '0 1 0';
+
 	if (!self.yaw_speed)
 		self.yaw_speed = 10;
+
 	self.view_ofs = '0 0 25';
 	self.use = monster_use;
 
@@ -166,19 +177,22 @@ void() flymonster_start_go =
 	if (self.target != "")
 	{
 		self.goalentity = self.movetarget = find(world, targetname, self.target);
+
 		if (!self.movetarget)
 		{
 			dprint ("Monster can't find target at ");
 			dprint (vtos(self.origin));
 			dprint ("\n");
 		}
-// this used to be an objerror
+		// this used to be an objerror
 		if (self.movetarget.classname == "path_corner")
 			self.th_walk ();
+
 		else
 			self.pausetime = 99999999;
 			self.th_stand ();
 	}
+
 	else
 	{
 		self.pausetime = 99999999;
@@ -188,7 +202,7 @@ void() flymonster_start_go =
 
 void() flymonster_start =
 {
-// spread think times so they don't all happen at same time
+	// spread think times so they don't all happen at same time
 	self.nextthink = self.nextthink + random()*0.5;
 	self.think = flymonster_start_go;
 	total_monsters = total_monsters + 1;
@@ -204,11 +218,13 @@ void() swimmonster_start_go =
 	}
 
 	self.takedamage = DAMAGE_AIM;
-//	total_monsters = total_monsters + 1;	// gb, fish count bugfix
+	//	total_monsters = total_monsters + 1;	// gb, fish count bugfix
 
 	self.ideal_yaw = self.angles * '0 1 0';
+
 	if (!self.yaw_speed)
 		self.yaw_speed = 10;
+
 	self.view_ofs = '0 0 10';
 	self.use = monster_use;
 	
@@ -218,29 +234,31 @@ void() swimmonster_start_go =
 	if (self.target != "")
 	{
 		self.goalentity = self.movetarget = find(world, targetname, self.target);
+
 		if (!self.movetarget)
 		{
 			dprint ("Monster can't find target at ");
 			dprint (vtos(self.origin));
 			dprint ("\n");
 		}
-// this used to be an objerror
+		// this used to be an objerror
 		self.ideal_yaw = vectoyaw(self.goalentity.origin - self.origin);
 		self.th_walk ();
 	}
+
 	else
 	{
 		self.pausetime = 99999999;
 		self.th_stand ();
 	}
 
-// spread think times so they don't all happen at same time
+	// spread think times so they don't all happen at same time
 	self.nextthink = self.nextthink + random()*0.5;
 };
 
 void() swimmonster_start =
 {
-// spread think times so they don't all happen at same time
+	// spread think times so they don't all happen at same time
 	self.nextthink = self.nextthink + random()*0.5;
 	self.think = swimmonster_start_go;
 	total_monsters = total_monsters + 1;

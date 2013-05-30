@@ -192,22 +192,22 @@ void() worldspawn =
 	lastspawn = world;
 	InitBodyQue ();
 
-// custom map attributes
+	// custom map attributes
 	if (self.model == "maps/e1m8.bsp")
 		cvar_set ("sv_gravity", "100");
 	else
 		cvar_set ("sv_gravity", "800");
 
-// the area based ambient sounds MUST be the first precache_sounds
+	// the area based ambient sounds MUST be the first precache_sounds
 
-// player precaches	
+	// player precaches	
 	W_Precache ();			// get weapon precaches
 
-// sounds used from C physics code
+	// sounds used from C physics code
 	precache_sound ("demon/dland2.wav");		// landing thud
 	precache_sound ("misc/h2ohit1.wav");		// landing splash
 
-// setup precaches allways needed
+	// setup precaches allways needed
 	precache_sound ("items/itembk2.wav");		// item respawn sound
 	precache_sound ("player/plyrjmp8.wav");		// player jump
 	precache_sound ("player/land.wav");			// player landing

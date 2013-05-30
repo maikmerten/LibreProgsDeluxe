@@ -41,6 +41,7 @@ void() button_return =
 	self.state = STATE_DOWN;
 	SUB_CalcMove (self.pos1, self.speed, button_done);
 	self.frame = 0;			// use normal textures
+
 	if (self.health)
 		self.takedamage = DAMAGE_YES;	// can be shot again
 };
@@ -73,6 +74,7 @@ void() button_touch =
 {
 	if (other.classname != "player")
 		return;
+
 	self.enemy = other;
 	button_fire ();
 };
@@ -99,8 +101,7 @@ When a button is touched, it moves some distance in the direction of it's angle,
 0) steam metal
 1) wooden clunk
 2) metallic click
-3) in-out
-*/
+3) in-out*/
 void() func_button =
 {
 	if (self.sounds == 0)
@@ -108,16 +109,19 @@ void() func_button =
 		precache_sound ("buttons/airbut1.wav");
 		self.noise = "buttons/airbut1.wav";
 	}
+
 	if (self.sounds == 1)
 	{
 		precache_sound ("buttons/switch21.wav");
 		self.noise = "buttons/switch21.wav";
 	}
+
 	if (self.sounds == 2)
 	{
 		precache_sound ("buttons/switch02.wav");
 		self.noise = "buttons/switch02.wav";
 	}
+
 	if (self.sounds == 3)
 	{
 		precache_sound ("buttons/switch04.wav");
@@ -139,13 +143,16 @@ void() func_button =
 		self.th_die = button_killed;
 		self.takedamage = DAMAGE_YES;
 	}
+
 	else
 		self.touch = button_touch;
 
 	if (!self.speed)
 		self.speed = 40;
+
 	if (!self.wait)
 		self.wait = 1;
+
 	if (!self.lip)
 		self.lip = 4;
 
