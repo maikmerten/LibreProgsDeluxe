@@ -603,6 +603,8 @@ void() PutClientInServer =
 	}
 
 	spawn_tdeath (self.origin, self);
+	
+	stuffcmd(self, "-attack\n");            // Supa, prevent shooting after respawning in MP
 };
 
 
