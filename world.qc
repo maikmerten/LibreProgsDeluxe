@@ -17,7 +17,7 @@
     See file, 'COPYING', for details.
 */
 
-void() InitBodyQue;
+void() InitBodyQueue;
 
 
 void() main =
@@ -190,7 +190,7 @@ World Types:
 void() worldspawn =
 {
 	lastspawn = world;
-	InitBodyQue ();
+	InitBodyQueue ();
 
 	// custom map attributes
 	if (self.model == "maps/e1m8.bsp")
@@ -368,42 +368,42 @@ BODY QUE
 ==============================================================================
 */
 
-entity	bodyque_head;
+entity	bodyqueue_head;
 
-void() bodyque =
+void() bodyqueue =
 {	// just here so spawn functions don't complain after the world
-	// creates bodyques
+	// creates bodyqueues
 };
 
-void() InitBodyQue =
+void() InitBodyQueue =
 {	
-	bodyque_head = spawn();
-	bodyque_head.classname = "bodyque";
-	bodyque_head.owner = spawn();
-	bodyque_head.owner.classname = "bodyque";
-	bodyque_head.owner.owner = spawn();
-	bodyque_head.owner.owner.classname = "bodyque";
-	bodyque_head.owner.owner.owner = spawn();
-	bodyque_head.owner.owner.owner.classname = "bodyque";
-	bodyque_head.owner.owner.owner.owner = bodyque_head;
+	bodyqueue_head = spawn();
+	bodyqueue_head.classname = "bodyqueue";
+	bodyqueue_head.owner = spawn();
+	bodyqueue_head.owner.classname = "bodyqueue";
+	bodyqueue_head.owner.owner = spawn();
+	bodyqueue_head.owner.owner.classname = "bodyqueue";
+	bodyqueue_head.owner.owner.owner = spawn();
+	bodyqueue_head.owner.owner.owner.classname = "bodyqueue";
+	bodyqueue_head.owner.owner.owner.owner = bodyqueue_head;
 };
 
 
 // make a body que entry for the given ent so the ent can be
 // respawned elsewhere
-void(entity ent) CopyToBodyQue =
+void(entity ent) CopyToBodyQueue =
 {
-	bodyque_head.angles = ent.angles;
-	bodyque_head.model = ent.model;
-	bodyque_head.modelindex = ent.modelindex;
-	bodyque_head.frame = ent.frame;
-	bodyque_head.colormap = ent.colormap;
-	bodyque_head.movetype = ent.movetype;
-	bodyque_head.velocity = ent.velocity;
-	bodyque_head.flags = 0;
-	setorigin (bodyque_head, ent.origin);
-	setsize (bodyque_head, ent.mins, ent.maxs);
-	bodyque_head = bodyque_head.owner;
+	bodyqueue_head.angles = ent.angles;
+	bodyqueue_head.model = ent.model;
+	bodyqueue_head.modelindex = ent.modelindex;
+	bodyqueue_head.frame = ent.frame;
+	bodyqueue_head.colormap = ent.colormap;
+	bodyqueue_head.movetype = ent.movetype;
+	bodyqueue_head.velocity = ent.velocity;
+	bodyqueue_head.flags = 0;
+	setorigin (bodyqueue_head, ent.origin);
+	setsize (bodyqueue_head, ent.mins, ent.maxs);
+	bodyqueue_head = bodyqueue_head.owner;
 };
 
 

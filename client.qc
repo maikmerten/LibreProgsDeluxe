@@ -325,7 +325,7 @@ void() changelevel_touch =
 	if (other.classname != "player")
 		return;
 
-	if ((cvar("noexit") == 1) || ((cvar("noexit") == 2) && (mapname != "start")))	// from GPL QW source
+	if ((cvar("noexit") == 1) || ((cvar("noexit") == 2) && (mapname != "start")))
 	{
 		T_Damage (other, self, self, 50000);
 		return;
@@ -381,7 +381,7 @@ void() respawn =
 	if (coop)
 	{
 		// make a copy of the dead body for appearances sake
-		CopyToBodyQue (self);
+		CopyToBodyQueue (self);
 		// get the spawn parms as they were at level start
 		setspawnparms (self);
 		// respawn		
@@ -391,7 +391,7 @@ void() respawn =
 	else if (deathmatch)
 	{
 		// make a copy of the dead body for appearances sake
-		CopyToBodyQue (self);
+		CopyToBodyQueue (self);
 		// set default spawn parms
 		SetNewParms ();
 		// respawn		
@@ -658,85 +658,6 @@ RULES
 ===============================================================================
 */
 
-/* 
-void(entity c) PrintClientScore =
-{
-	if (c.frags > -10 && c.frags < 0)
-		bprint (" ");
-	else if (c.frags >= 0)
-	{
-		if (c.frags < 100)
-			bprint (" ");
-		if (c.frags < 10)
-			bprint (" ");
-	}
-	bprint (ftos(c.frags));
-	bprint (" ");
-	bprint (c.netname);
-	bprint ("\n");
-};
-
-void() DumpScore =
-{
-	local entity	e, sort, walk;
-
-	if (world.chain)
-		error ("DumpScore: world.chain is set");
-
-// build a sorted lis
-	e = find(world, classname, "player");
-	sort = world;
-	while (e)
-	{
-		if (!sort)
-		{
-			sort = e;
-			e.chain = world;
-		}
-		else
-		{
-			if (e.frags > sort.frags)
-			{
-				e.chain = sort;
-				sort = e;
-			}
-			else
-			{
-				walk = sort;
-				do
-				{
-					if (!walk.chain)
-					{
-						e.chain = world;
-						walk.chain = e;
-					}
-					else if (walk.chain.frags < e.frags)
-					{
-						e.chain = walk.chain;
-						walk.chain = e;
-					}
-					else
-						walk = walk.chain;
-				} while (walk.chain != e);
-			}
-		}
-		
-		e = find(e, classname, "player");
-	}
-
-// print the list
-	
-	bprint ("\n");	
-	while (sort)
-	{
-		PrintClientScore (sort);
-		sort = sort.chain;
-	}
-	bprint ("\n");
-};
-
-*/
-
 /*
 go to the next level for deathmatch
 */
@@ -823,30 +744,12 @@ void() CheckRules =
 	if (timelimit && time >= timelimit)
 	{
 		NextLevel ();
-/*
-		gameover = TRUE;
-		bprint ("\n\n\n==============================\n");
-		bprint ("game exited after ");
-		bprint (ftos(timelimit/60));
-		bprint (" minutes\n");
-		DumpScore ();
-		localcmd ("killserver\n");
-*/
 		return;
 	}
 	
 	if (fraglimit && self.frags >= fraglimit)
 	{
 		NextLevel ();
-/*
-		gameover = TRUE;
-		bprint ("\n\n\n==============================\n");
-		bprint ("game exited after ");
-		bprint (ftos(self.frags));
-		bprint (" frags\n");
-		DumpScore ();
-		localcmd ("killserver\n");
-*/
 		return;
 	}	
 };
@@ -907,7 +810,7 @@ void() PlayerJump =
 		else
 			self.velocity_z = 50;
 
-		// play swiming sound
+		// play swimming sound
 		if (self.swim_flag < time)
 		{
 			self.swim_flag = time + 1;
@@ -1085,7 +988,9 @@ void() PlayerPreThink =
 
 	makevectors (self.v_angle);		// is this still used
 
-	CheckRules ();
+	if (deathmatch || coop)	// gb, this is a waste in SP
+		CheckRules ();
+
 	WaterMove ();
 
 	if (self.waterlevel == 2)
@@ -1445,8 +1350,6 @@ void(entity targ, entity attacker) ClientObituary =
 				bprint (attacker.netname);
 				bprint (deathstring);
 				attacker.frags = attacker.frags - 1;
-				//ZOID 12-13-96:  killing a teammate logs as suicide
-				//logfrag (attacker, attacker);
 				return;
 			}
 
