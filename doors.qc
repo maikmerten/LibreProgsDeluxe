@@ -130,7 +130,7 @@ void() door_fire =
 // play use key sound
 
 	if (self.items)
-		sound (self, CHAN_VOICE, self.noise4, 1, ATTN_NORM);
+		sound (self, CHAN_ITEM, self.noise4, 1, ATTN_NORM);	// gb, door unlock sound bugfix
 
 	self.message = string_null;		// no more message
 	oself = self;
