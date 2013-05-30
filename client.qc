@@ -50,6 +50,13 @@ void() info_intermission =
 
 void() SetChangeParms =
 {
+	// from GPL QW source
+	if (self.health <= 0)
+	{
+		SetNewParms ();
+		return;
+	}
+ 
 // remove items
 	self.items = self.items - (self.items & 
 	(IT_KEY1 | IT_KEY2 | IT_INVISIBILITY | IT_INVULNERABILITY | IT_SUIT | IT_QUAD) );
@@ -81,6 +88,7 @@ void() SetNewParms =
 	parm4 = 25;
 	parm5 = 0;
 	parm6 = 0;
+	parm7 = 0;	// from GPL QW source
 	parm8 = 1;
 	parm9 = 0;
 };
@@ -305,11 +313,12 @@ void() changelevel_touch =
 	if (other.classname != "player")
 		return;
 
-	if (cvar("noexit"))
+	if ((cvar("noexit") == 1) || ((cvar("noexit") == 2) && (mapname != "start")))	// from GPL QW source
 	{
 		T_Damage (other, self, self, 50000);
 		return;
 	}
+
 	bprint (other.netname);
 	bprint (" exited the level\n");
 	
@@ -413,8 +422,16 @@ Returns the entity to spawn at
 */
 entity() SelectSpawnPoint =
 {
-	local	entity spot;
-	
+	// From GPL QW source
+	local   entity spot, /*newspot,*/ thing;
+	local   float   numspots, totalspots;
+	local   float   /*rnum,*/ pcount;
+//	local   float   rs;
+	local entity spots;
+
+	numspots = 0;
+	totalspots = 0;
+
 // testinfo_player_start is only found in regioned levels
 	spot = find (world, classname, "testplayerstart");
 	if (spot)
@@ -431,11 +448,67 @@ entity() SelectSpawnPoint =
 	}
 	else if (deathmatch)
 	{
+/*
 		lastspawn = find(lastspawn, classname, "info_player_deathmatch");
 		if (lastspawn == world)
 			lastspawn = find (lastspawn, classname, "info_player_deathmatch");
 		if (lastspawn != world)
 			return lastspawn;
+*/
+
+		// From GPL QW source. Better method
+
+		// ok, find all spots that don't have players nearby
+
+		spots = world;
+		spot = find (world, classname, "info_player_deathmatch");       
+		while (spot)
+		{
+			totalspots = totalspots + 1;
+
+			thing=findradius(spot.origin, 84);
+			pcount=0;               
+			while (thing)
+			{
+				if (thing.classname == "player")
+					pcount=pcount + 1;                      
+				thing=thing.chain;      
+			}
+			if (pcount == 0) {
+				spot.goalentity = spots;
+				spots = spot;
+				numspots = numspots + 1;
+			}
+
+			// Get the next spot in the chain
+			spot = find (spot, classname, "info_player_deathmatch");                
+		}
+		totalspots=totalspots - 1;
+		if (!numspots) {
+			// ack, they are all full, just pick one at random
+		//	bprint (PRINT_HIGH, "Ackk! All spots are full. Selecting random spawn spot\n");
+			totalspots = rint((random() * totalspots));
+			spot = find (world, classname, "info_player_deathmatch");       
+			while (totalspots > 0) {
+				totalspots = totalspots - 1;
+				spot = find (spot, classname, "info_player_deathmatch");
+			}
+			return spot;
+		}
+		
+		// We now have the number of spots available on the map in numspots
+		// Generate a random number between 1 and numspots
+
+		numspots = numspots - 1;
+	
+		numspots = rint((random() * numspots ) );
+
+		spot = spots;
+		while (numspots > 0) {
+			spot = spot.goalentity;
+			numspots = numspots - 1;
+		}
+		return spot;
 	}
 
 	if (serverflags)
@@ -579,6 +652,7 @@ RULES
 ===============================================================================
 */
 
+/* 
 void(entity c) PrintClientScore =
 {
 	if (c.frags > -10 && c.frags < 0)
@@ -655,6 +729,8 @@ void() DumpScore =
 	bprint ("\n");
 };
 
+*/
+
 /*
 go to the next level for deathmatch
 */
@@ -662,16 +738,57 @@ void() NextLevel =
 {
 	local entity o;
 
-// find a trigger changelevel
-	o = find(world, classname, "trigger_changelevel");
-	if (!o || mapname == "start")
-	{	// go back to same map if no trigger_changelevel
+// From GPL QW source
+
+//	local string newmap;
+
+	if (nextmap != "")
+		return; // already done
+
+	if (mapname == "start")
+	{
+		if (!cvar("registered"))
+		{
+			mapname = "e1m1";
+		}
+		else if (!(serverflags & 1))
+		{
+			mapname = "e1m1";
+			serverflags = serverflags | 1;
+		}
+		else if (!(serverflags & 2))
+		{
+			mapname = "e2m1";
+			serverflags = serverflags | 2;
+		}
+		else if (!(serverflags & 4))
+		{
+			mapname = "e3m1";
+			serverflags = serverflags | 4;
+		}
+		else if (!(serverflags & 8))
+		{
+			mapname = "e4m1";
+			serverflags = serverflags - 7;
+		}
+ 
 		o = spawn();
 		o.map = mapname;
 	}
+	else
+	{
+		// find a trigger changelevel
+		o = find(world, classname, "trigger_changelevel");
+		if (!o || mapname == "start")
+		{       // go back to same map if no trigger_changelevel
+			o = spawn();
+			o.map = mapname;
+		}
+	}
 
 	nextmap = o.map;
-	
+	gameover = TRUE; // gb
+
 	if (o.nextthink < time)
 	{
 		o.think = execute_changelevel;
@@ -972,6 +1089,13 @@ void() PlayerPreThink =
 // teleporters can force a non-moving pause time	
 	if (time < self.pausetime)
 		self.velocity = '0 0 0';
+
+	// From GPL QW source
+	if(time > self.attack_finished && self.currentammo == 0 && self.weapon != IT_AXE)
+	{
+		self.weapon = W_BestWeapon ();
+		W_SetCurrentAmmo ();
+	}
 };
 	
 /*
@@ -1225,6 +1349,12 @@ void(entity targ, entity attacker) ClientObituary =
 	local	float rnum;
 	local	string deathstring, deathstring2;
 	deathstring = deathstring2 = "";
+	// From GPL QW source
+	local   float  attackerteam, targteam;	// gb
+	
+	// gb
+	attackerteam = attacker.team;
+	targteam = targ.team;
 
 	rnum = random();
 
@@ -1261,7 +1391,15 @@ void(entity targ, entity attacker) ClientObituary =
 				
 				if (targ.weapon == 64 && targ.waterlevel > 1)
 				{
-					bprint (" discharges into the water.\n");
+					// from GPL QW source
+					if (targ.watertype == CONTENT_SLIME)
+						//bprint (PRINT_MEDIUM," discharges into the slime\n");
+						bprint (" discharges into the slime\n");
+					else if (targ.watertype == CONTENT_LAVA)
+						//bprint (PRINT_MEDIUM," discharges into the lava\n");
+						bprint (" discharges into the lava\n");
+					else
+						bprint (" discharges into the water.\n");
 					return;
 				}
 				if (targ.weapon == 16)
@@ -1270,6 +1408,28 @@ void(entity targ, entity attacker) ClientObituary =
 					bprint (" becomes bored with life\n");
 				else
 					bprint (" checks if his weapon is loaded\n");
+				return;
+			}
+			// from GPL QW source
+			else if ( (teamplay == 2) && (targteam == attackerteam) &&
+//				(attackerteam != "") )
+				(attackerteam != 0) )	// gb
+			{
+				if (rnum < 0.25)
+					deathstring = " mows down a teammate\n";
+				else if (rnum < 0.50)
+					deathstring = " checks his glasses\n";
+				else if (rnum < 0.75)
+					deathstring = " gets a frag for the other team\n";
+				else
+					deathstring = " loses another friend\n";
+				//bprint (PRINT_MEDIUM, attacker.netname);
+				//bprint (PRINT_MEDIUM, deathstring);
+				bprint (attacker.netname);
+				bprint (deathstring);
+				attacker.frags = attacker.frags - 1;
+				//ZOID 12-13-96:  killing a teammate logs as suicide
+				//logfrag (attacker, attacker);
 				return;
 			}
 			else
@@ -1314,12 +1474,37 @@ void(entity targ, entity attacker) ClientObituary =
 				}
 				if (rnum == IT_ROCKET_LAUNCHER)
 				{
-					deathstring = " rides ";
-					deathstring2 = "'s rocket\n";
-					if (targ.health < -40)
+					// from GPL QW source
+					if (attacker.super_damage_finished > 0 && targ.health < -40)
 					{
-						deathstring = " was gibbed by ";
-						deathstring2 = "'s rocket\n" ;
+						rnum = random();
+						if (rnum < 0.3)
+							deathstring = " was brutalized by ";
+						else if (rnum < 0.6)
+							deathstring = " was smeared by ";
+						else
+						{
+							//bprint (PRINT_MEDIUM, attacker.netname);
+							//bprint (PRINT_MEDIUM, " rips ");
+							//bprint (PRINT_MEDIUM, targ.netname);
+							//bprint (PRINT_MEDIUM, " a new one\n");
+							bprint (attacker.netname);
+							bprint (" rips ");
+							bprint (targ.netname);
+							bprint (" a new one\n");
+							return;
+						}
+						deathstring2 = "'s quad rocket\n";
+					}
+					else
+					{
+						deathstring = " rides ";
+						deathstring2 = "'s rocket\n";
+						if (targ.health < -40)
+						{
+							deathstring = " was gibbed by ";
+							deathstring2 = "'s rocket\n" ;
+						}
 					}
 				}
 				if (rnum == IT_LIGHTNING)
