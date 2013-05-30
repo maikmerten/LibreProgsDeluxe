@@ -57,7 +57,7 @@ void() W_FireAxe =
 	local	vector	source;
 	local	vector	org;
 
-	makevectors (self.v_angle);//copypasta'd directly from gpl'd qw source on github.
+	makevectors (self.v_angle);
 	source = self.origin + '0 0 16';
 	traceline (source, source + v_forward*64, FALSE, self);
 	if (trace_fraction == 1.0)
@@ -186,6 +186,7 @@ void() ApplyMultiDamage =
 {
 	if (!multi_ent)
 		return;
+
 	T_Damage (multi_ent, self, self, multi_damage);
 };
 
@@ -481,7 +482,7 @@ void(vector p1, vector p2, entity from, float damage) LightningDamage =
 void() W_FireLightning =
 {
 	local	vector		org;
-	local   float           cells;//copypasta'd directly from gpl'd qw source on github.
+	local   float           cells;
 
 	if (self.ammo_cells < 1)
 	{
@@ -492,7 +493,7 @@ void() W_FireLightning =
 
 // explode if under water
 	if (self.waterlevel > 1)
-	{//copypasta'd directly from gpl'd qw source on github.
+	{
 		cells = self.ammo_cells;
 		self.ammo_cells = 0;
 		W_SetCurrentAmmo ();
@@ -843,7 +844,7 @@ float() W_BestWeapon =
 	
 	it = self.items;
 
-	if (self.waterlevel <= 1 && self.ammo_cells >= 1 && (it & IT_LIGHTNING) )//copypasta'd directly from gpl'd qw source on github.
+	if (self.waterlevel <= 1 && self.ammo_cells >= 1 && (it & IT_LIGHTNING) )
 
 		return IT_LIGHTNING;
 	else if(self.ammo_nails >= 2 && (it & IT_SUPER_NAILGUN) )
@@ -854,14 +855,6 @@ float() W_BestWeapon =
 		return IT_NAILGUN;
 	else if(self.ammo_shells >= 1 && (it & IT_SHOTGUN) )
 		return IT_SHOTGUN;
-		
-/*
-	if(self.ammo_rockets >= 1 && (it & IT_ROCKET_LAUNCHER) )
-		return IT_ROCKET_LAUNCHER;
-	else if(self.ammo_rockets >= 1 && (it & IT_GRENADE_LAUNCHER) )
-		return IT_GRENADE_LAUNCHER;
-
-*/
 
 	return IT_AXE;
 };
@@ -1151,8 +1144,6 @@ void() CycleWeaponCommand =
 
 /*
 ============
-//copypasta'd directly from gpl'd qw source on github.
-
 CycleWeaponReverseCommand
 
 Go to the prev weapon with ammo
@@ -1160,68 +1151,75 @@ Go to the prev weapon with ammo
 */
 void() CycleWeaponReverseCommand =
 {
-local float it, am;
+	local float it, am;
 
-it = self.items;
-self.impulse = 0;
+	it = self.items;
+	self.impulse = 0;
 
-while (1)
-{
-am = 0;
+	while (1)
+	{
+		am = 0;
 
-if (self.weapon == IT_LIGHTNING)
-{
-self.weapon = IT_ROCKET_LAUNCHER;
-if (self.ammo_rockets < 1)
-am = 1;
-}
-else if (self.weapon == IT_ROCKET_LAUNCHER)
-{
-self.weapon = IT_GRENADE_LAUNCHER;
-if (self.ammo_rockets < 1)
-am = 1;
-}
-else if (self.weapon == IT_GRENADE_LAUNCHER)
-{
-self.weapon = IT_SUPER_NAILGUN;
-if (self.ammo_nails < 2)
-am = 1;
-}
-else if (self.weapon == IT_SUPER_NAILGUN)
-{
-self.weapon = IT_NAILGUN;
-if (self.ammo_nails < 1)
-am = 1;
-}
-else if (self.weapon == IT_NAILGUN)
-{
-self.weapon = IT_SUPER_SHOTGUN;
-if (self.ammo_shells < 2)
-am = 1;
-}
-else if (self.weapon == IT_SUPER_SHOTGUN)
-{
-self.weapon = IT_SHOTGUN;
-if (self.ammo_shells < 1)
-am = 1;
-}
-else if (self.weapon == IT_SHOTGUN)
-{
-self.weapon = IT_AXE;
-}
-else if (self.weapon == IT_AXE)
-{
-self.weapon = IT_LIGHTNING;
-if (self.ammo_cells < 1)
-am = 1;
-}
+		if (self.weapon == IT_LIGHTNING)
+		{
+			self.weapon = IT_ROCKET_LAUNCHER;
+			if (self.ammo_rockets < 1)
+			am = 1;
+		}
+	
+		else if (self.weapon == IT_ROCKET_LAUNCHER)
+		{
+			self.weapon = IT_GRENADE_LAUNCHER;
+			if (self.ammo_rockets < 1)
+			am = 1;
+		}
 
-if ( (it & self.weapon) && am == 0)
-{
-W_SetCurrentAmmo ();
-return;
-}
-}
+		else if (self.weapon == IT_GRENADE_LAUNCHER)
+		{
+			self.weapon = IT_SUPER_NAILGUN;
+			if (self.ammo_nails < 2)
+			am = 1;
+		}
+
+		else if (self.weapon == IT_SUPER_NAILGUN)
+		{
+			self.weapon = IT_NAILGUN;
+			if (self.ammo_nails < 1)
+			am = 1;
+		}
+
+		else if (self.weapon == IT_NAILGUN)
+		{
+			self.weapon = IT_SUPER_SHOTGUN;
+			if (self.ammo_shells < 2)
+			am = 1;
+		}
+
+		else if (self.weapon == IT_SUPER_SHOTGUN)
+		{
+			self.weapon = IT_SHOTGUN;
+			if (self.ammo_shells < 1)
+			am = 1;
+		}
+
+		else if (self.weapon == IT_SHOTGUN)
+		{
+			self.weapon = IT_AXE;
+		}
+
+		else if (self.weapon == IT_AXE)
+		{
+			self.weapon = IT_LIGHTNING;
+			if (self.ammo_cells < 1)
+			am = 1;
+		}
+
+		if ( (it & self.weapon) && am == 0)
+		{
+			W_SetCurrentAmmo ();
+			return;
+		}
+	}
 
 };
 
@@ -1243,6 +1241,7 @@ void() QuadCheat =
 {
 	if (deathmatch || coop)
 		return;
+
 	self.super_time = 1;
 	self.super_damage_finished = time + 30;
 	self.items = self.items | IT_QUAD;
@@ -1288,7 +1287,7 @@ void() W_WeaponFrame =
 
 	ImpulseCommands ();
 	
-// check for attack
+	// check for attack
 	if (self.button0)
 	{
 		SuperDamageSound ();
