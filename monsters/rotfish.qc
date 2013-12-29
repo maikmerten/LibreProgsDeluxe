@@ -193,6 +193,11 @@ void() monster_fish =
 
 	setmodel (self, "progs/fish.mdl");
 
+	//gnounc
+	self.netname = "Rotfish";
+	self.noise = "fish/idle.wav"; //gnounc 	(for completeness..just in case)
+	self.killstring = " was fed to the Rotfish\n";
+
 	setsize (self, '-16 -16 -24', '16 16 24');
 	self.health = 25;
 	

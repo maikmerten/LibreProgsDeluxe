@@ -361,6 +361,10 @@ void() trigger_changelevel =
 {
 	if (!self.map)
 		objerror ("changelevel trigger doesn't have map");
+
+	//gnounc
+	self.netname = "changelevel";
+	self.killstring = " tried to leave\n";
 	
 	InitTrigger ();
 	self.touch = changelevel_touch;
@@ -1504,65 +1508,6 @@ void(entity targ, entity attacker) ClientObituary =
 				return;
 			}
 
-			if (attacker.flags & FL_MONSTER)
-			{
-				if (attacker.classname == "monster_army")
-					bprint (" was shot by a Grunt\n");
-
-				if (attacker.classname == "monster_demon1")
-					bprint (" was eviscerated by a Fiend\n");
-
-				if (attacker.classname == "monster_dog")
-					bprint (" was mauled by a Rottweiler\n");
-
-				if (attacker.classname == "monster_dragon")
-					bprint (" was fried by a Dragon\n");
-
-				if (attacker.classname == "monster_enforcer")
-					bprint (" was blasted by an Enforcer\n");
-
-				if (attacker.classname == "monster_fish")
-					bprint (" was fed to the Rotfish\n");
-
-				if (attacker.classname == "monster_hell_knight")
-					bprint (" was slain by a Death Knight\n");
-
-				if (attacker.classname == "monster_knight")
-					bprint (" was slashed by a Knight\n");
-
-				if (attacker.classname == "monster_ogre")
-					bprint (" was destroyed by an Ogre\n");
-
-				if (attacker.classname == "monster_oldone")
-					bprint (" became one with Shub-Niggurath\n");
-
-				if (attacker.classname == "monster_shalrath")
-					bprint (" was exploded by a Vore\n");
-
-				if (attacker.classname == "monster_shambler")
-					bprint (" was smashed by a Shambler\n");
-
-				if (attacker.classname == "monster_tarbaby")
-					bprint (" was slimed by a Spawn\n");
-
-				if (attacker.classname == "monster_vomit")
-					bprint (" was vomited on by a Vomitus\n");
-
-				if (attacker.classname == "monster_wizard")
-					bprint (" was scragged by a Scrag\n");
-
-				if (attacker.classname == "monster_zombie")
-					bprint (" joins the Zombies\n");
-
-				return;
-			}
-
-			if (attacker.classname == "explo_box")
-			{
-				bprint (" blew up\n");
-				return;
-			}
-
 			if (attacker.solid == SOLID_BSP && attacker != world)
 			{	
 				bprint (" was squished\n");
@@ -1576,21 +1521,10 @@ void(entity targ, entity attacker) ClientObituary =
 				return;
 			}
 
-			if (attacker.classname == "trap_shooter" || attacker.classname == "trap_spikeshooter")
-			{
-				bprint (" was spiked\n");
-				return;
-			}
-
-			if (attacker.classname == "fireball")
-			{
-				bprint (" ate a lavaball\n");
-				return;
-			}
-
-			if (attacker.classname == "trigger_changelevel")
-			{
-				bprint (" tried to leave\n");
+			//FIXME string_nul ??? maybe not necessary	//gnounc
+			if(attacker.killstring)
+			{//gnounc
+				bprint (attacker.killstring);
 				return;
 			}
 

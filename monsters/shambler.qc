@@ -404,6 +404,12 @@ void() monster_shambler =
 	self.solid = SOLID_SLIDEBOX;
 	self.movetype = MOVETYPE_STEP;
 	setmodel (self, "progs/shambler.mdl");
+	
+	//gnounc
+	self.noise = "shambler/ssight.wav";	//gnounc
+	self.netname = "Shambler";
+	self.killstring = " was smashed by a Shambler\n";
+
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 600;

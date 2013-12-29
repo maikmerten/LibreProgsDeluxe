@@ -313,6 +313,11 @@ void() monster_army =
 
 	setmodel (self, "progs/soldier.mdl");
 
+	//gnounc
+	self.noise = "soldier/sight1.wav";	//gnounc
+	self.netname = "Grunt";
+	self.killstring = " was shot by a Grunt\n";
+
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 30;
 

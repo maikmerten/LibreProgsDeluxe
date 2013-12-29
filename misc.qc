@@ -194,6 +194,10 @@ void() misc_fireball =
 	self.nextthink = time + (random() * 5);
 	self.think = fire_fly;
 
+	//gnounc
+	self.netname = "lava ball";
+	self.killstring = " ate a lavaball\n";
+
 	if (!self.speed)
 		self.speed = 1000;
 };
@@ -216,6 +220,10 @@ void() fire_fly =
 	fireball.nextthink = time + 5;
 	fireball.think = SUB_Remove;
 	fireball.touch = fire_touch;
+
+	//gnounc
+	self.netname = "lava ball";
+	self.killstring = " ate a lavaball\n";
 	
 	self.nextthink = time + (random() * 5) + 3;
 	self.think = fire_fly;
@@ -262,6 +270,10 @@ void() misc_explobox =
 	self.th_die = barrel_explode;
 	self.takedamage = DAMAGE_AIM;
 
+	//gnounc
+	self.netname = "exploding barrel";
+	self.killstring = " blew up\n";
+
 	self.origin_z = self.origin_z + 2;
 	oldz = self.origin_z;
 	droptofloor();
@@ -293,6 +305,10 @@ void() misc_explobox2 =
 	self.health = 20;
 	self.th_die = barrel_explode;
 	self.takedamage = DAMAGE_AIM;
+
+	//gnounc
+	self.netname = "exploding barrel";
+	self.killstring = " blew up\n";
 
 	self.origin_z = self.origin_z + 2;
 	oldz = self.origin_z;
@@ -349,6 +365,10 @@ void() trap_spikeshooter =
 {
 	SetMovedir ();
 	self.use = spikeshooter_use;
+	
+	//gnounc
+	self.netname = "spike trap";
+	self.killstring =" was spiked\n";
 
 	if (self.spawnflags & SPAWNFLAG_LASER)
 	{

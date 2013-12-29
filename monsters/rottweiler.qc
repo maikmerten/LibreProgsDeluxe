@@ -361,6 +361,11 @@ void() monster_dog =
 
 	setmodel (self, "progs/dog.mdl");
 
+	//gnounc
+	self.noise = "dog/dsight.wav";	
+	self.netname = "Rottweiler";
+	self.killstring = " was mauled by a Rottweiler\n";
+
 	setsize (self, '-32 -32 -24', '32 32 40');
 	self.health = 25;
 

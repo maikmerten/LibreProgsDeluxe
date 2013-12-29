@@ -263,6 +263,11 @@ void() boss_awake =
 	self.takedamage = DAMAGE_NO;
 	
 	setmodel (self, "progs/boss.mdl");
+
+	//gnounc
+	self.netname = "Cthon";
+	self.killstring = "Has Cthon ever really killed someone? -GNOUNC";
+
 	setsize (self, '-128 -128 -24', '128 128 256');
 	
 	if (skill == 0)

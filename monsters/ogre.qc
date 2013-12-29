@@ -528,6 +528,11 @@ void() monster_ogre =
 
 	setmodel (self, "progs/ogre.mdl");
 
+	//gnounc
+	self.noise = "ogre/ogwake.wav";	//gnounc
+	self.netname = "Ogre";
+	self.killstring = " was destroyed by an Ogre\n";
+
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 200;
 
@@ -538,6 +543,8 @@ void() monster_ogre =
 	self.th_melee = ogre_melee;
 	self.th_missile = ogre_nail1;
 	self.th_pain = ogre_pain;
+
+
 	
 	walkmonster_start();
 };

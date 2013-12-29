@@ -369,6 +369,14 @@ void() monster_enforcer =
 
 	setmodel (self, "progs/enforcer.mdl");
 
+	//gnounc
+	self.netname = "enforcer";
+	self.killstring = " was blasted by an Enforcer\n";
+	self.noise = "enforcer/sight1.wav";	//gnounc
+	self.noise1 = "enforcer/sight2.wav";	//gnounc
+	self.noise2 = "enforcer/sight3.wav";	//gnounc
+	self.noise3 = "enforcer/sight4.wav";	//gnounc
+
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 80;
 

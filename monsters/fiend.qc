@@ -221,7 +221,10 @@ void() monster_demon1 =
 	self.solid = SOLID_SLIDEBOX;
 	self.movetype = MOVETYPE_STEP;
 
+	//gnounc
 	setmodel (self, "progs/demon.mdl");
+	self.noise = "demon/sight2.wav";
+	self.killstring = " was eviscerated by a Fiend\n";
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 300;

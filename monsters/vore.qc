@@ -259,6 +259,12 @@ void() monster_shalrath =
 	self.movetype = MOVETYPE_STEP;
 	
 	setmodel (self, "progs/shalrath.mdl");
+
+	//gnounc
+	self.noise = "shalrath/sight.wav";	//gnounc
+	self.netname = "Vore";
+	self.killstring = " was exploded by a Vore\n";
+
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 400;
 

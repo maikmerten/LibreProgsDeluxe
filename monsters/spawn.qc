@@ -223,6 +223,11 @@ void() monster_tarbaby =
 
 	setmodel (self, "progs/tarbaby.mdl");
 
+	//gnounc
+	self.noise = "blob/sight1.wav";	//gnounc
+	self.netname = "Spawn";
+	self.killstring = " was slimed by a Spawn\n";
+
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 80;
 

@@ -456,6 +456,11 @@ void() monster_hell_knight =
 
 	setmodel (self, "progs/hknight.mdl");
 
+	//gnounc
+	self.noise = "hknight/sight1.wav";	//gnounc
+	self.netname = "Hell Knight";
+	self.killstring = " was slain by a Hell Knight\n";
+
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 250;
 

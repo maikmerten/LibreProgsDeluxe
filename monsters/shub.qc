@@ -291,7 +291,11 @@ void() monster_oldone =
 	self.solid = SOLID_SLIDEBOX;
 	self.movetype = MOVETYPE_STEP;
 	
+	//gnounc
 	setmodel (self, "progs/oldone.mdl");
+	self.netname = "Shub-Niggurath";
+	self.killstring = " became one with Shub-Niggurath\n";
+
 	setsize (self, '-160 -128 -24', '160 128 256');
 
 	self.health = 40000;		// kill by telefrag
