@@ -67,7 +67,7 @@ void(entity missile, float mspeed, float accuracy) LaunchMissile =
 	local	vector	vec, move;
 	local	float	fly;
 
-	makevectors (self.angles);
+	makevectors2 (self.angles);
 		
 	// set missile speed
 	vec = self.enemy.origin + self.enemy.mins + self.enemy.size * 0.7 - missile.origin;
@@ -219,7 +219,7 @@ void() Wiz_FastFire =
 	{
 		self.owner.effects = self.owner.effects | EF_MUZZLEFLASH;
 
-		makevectors (self.enemy.angles);	
+		makevectors2 (self.enemy.angles);	
 		dst = self.enemy.origin - 13*self.movedir;
 	
 		vec = normalize(dst - self.origin);
@@ -242,7 +242,7 @@ void() Wiz_StartFast =
 	
 	sound (self, CHAN_WEAPON, "wizard/wattack.wav", 1, ATTN_NORM);
 	self.v_angle = self.angles;
-	makevectors (self.angles);
+	makevectors2 (self.angles);
 
 	missile = spawn ();
 	missile.owner = self;

@@ -168,7 +168,7 @@ void(float side) ShamClaw =
 
 	if (side)
 	{
-		makevectors (self.angles);
+		makevectors2 (self.angles);
 		SpawnMeatSpray (self.origin + v_forward*16, side * v_right);
 	}
 };

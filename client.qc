@@ -602,7 +602,7 @@ void() PutClientInServer =
 	
 	if (deathmatch || coop)
 	{
-		makevectors(self.angles);
+		makevectors2(self.angles);
 		spawn_tfog (self.origin + v_forward*20);
 	}
 
@@ -948,7 +948,7 @@ void() CheckWaterJump =
 	local vector start, end;
 
 // check for a jump-out-of-water
-	makevectors (self.angles);
+	makevectors2 (self.angles);
 	start = self.origin;
 	start_z = start_z + 8; 
 	v_forward_z = 0;

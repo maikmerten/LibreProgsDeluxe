@@ -61,6 +61,15 @@ walkmove(angle, speed) primitive is all or nothing
 entity	sight_entity;
 float	sight_entity_time;
 
+//pitch (angles_x) is inverted in quake due to a bug
+	//use makevectors2 for monsters with nonzero pitch
+//anyone encountering this comment with a better understanding should update the comment to be more informative and useful to modders --gnounc
+void makevectors2(vector ang) = 
+{
+	ang_x *= -1;
+	makevectors(ang);
+};
+
 float(float v) anglemod =
 {
 	while (v >= 360)
@@ -214,7 +223,7 @@ float(entity targ) infront =
 	local vector	vec;
 	local float		dot;
 	
-	makevectors (self.angles);
+	makevectors2 (self.angles);
 	vec = normalize (targ.origin - self.origin);
 	dot = vec * v_forward;
 	

@@ -183,7 +183,7 @@ void() ai_charge_side =
 	self.ideal_yaw = vectoyaw(self.enemy.origin - self.origin);
 	ChangeYaw ();
 
-	makevectors (self.angles);
+	makevectors2 (self.angles);
 	dtemp = self.enemy.origin - 30*v_right;
 	heading = vectoyaw(dtemp - self.origin);
 	

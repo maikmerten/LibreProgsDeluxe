@@ -113,7 +113,7 @@ void(vector org, vector vel) SpawnMeatSpray =
 	missile.movetype = MOVETYPE_BOUNCE;
 	missile.solid = SOLID_NOT;
 
-	makevectors (self.angles);
+	makevectors2 (self.angles);
 
 	missile.velocity = vel;
 	missile.velocity_z = missile.velocity_z + 250 + 50*random();

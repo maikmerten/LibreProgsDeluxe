@@ -568,6 +568,10 @@ float	AS_MISSILE		= 4;
 //additions. --gnounc
 .string		killstring;		//the message a monster or item leaves when it kills you "was mauled by a rottweiler" etc. //gnounc
 
+//pitch (angles_x) is inverted in quake due to a bug
+	//use makevectors2 for monsters with nonzero pitch
+//anyone encountering this comment with a better understanding should update the comment to be more informative and useful to modders --gnounc
+void makevectors2(vector ang);		
 
 //===========================================================================
 	

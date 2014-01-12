@@ -105,7 +105,7 @@ void() multi_touch =
 	// if the trigger has an angles field, check player's facing direction
 	if (self.movedir != '0 0 0')
 	{
-		makevectors (other.angles);
+		makevectors2 (other.angles);
 		if (v_forward * self.movedir < 0)
 			return;		// not facing the right way
 	}
