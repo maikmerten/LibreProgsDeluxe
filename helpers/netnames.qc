@@ -130,15 +130,15 @@ string getMapname(string m) =
 			return "The Elder God Shrine";
 		case "e4m4":
 			return "The Palace of Hate";
-		case "e4m5"":
+		case "e4m5":
 			return "Hell's Atrium";
-		case "e4m6"":
+		case "e4m6":
 			return "The Pain Maze";
-		case "e4m7"":
+		case "e4m7":
 			return "Azure Agony";
 		case "e4m8":
 			return "The Nameless City";
-		case "end"":
+		case "end":
 			return "Shub-Niggurath's Pit";
 
 		default:
