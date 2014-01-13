@@ -79,6 +79,7 @@ Sets the clipping size and plants the object on the floor
 ============*/
 void() StartItem =
 {
+	self.netname = getNetname(self.items);	//gnounc		--for any items that dont already set their netnames
 	self.nextthink = time + 0.2;	// items start after other solids
 	self.think = PlaceItem;
 };
@@ -1442,33 +1443,8 @@ void() DropBackpack =
 	item.origin = self.origin - '0 0 24';
 	
 	item.items = self.weapon;
-
-	if (item.items == IT_AXE)
-		item.netname = "Axe";
-
-	else if (item.items == IT_SHOTGUN)
-		item.netname = "Shotgun";
-
-	else if (item.items == IT_SUPER_SHOTGUN)
-		item.netname = "Double-barrelled Shotgun";
-
-	else if (item.items == IT_NAILGUN)
-		item.netname = "Nailgun";
-
-	else if (item.items == IT_SUPER_NAILGUN)
-		item.netname = "Super Nailgun";
-
-	else if (item.items == IT_GRENADE_LAUNCHER)
-		item.netname = "Grenade Launcher";
-
-	else if (item.items == IT_ROCKET_LAUNCHER)
-		item.netname = "Rocket Launcher";
-
-	else if (item.items == IT_LIGHTNING)
-		item.netname = "Thunderbolt";
-
-	else
-		item.netname = "";
+	//gnounc
+	item.netname = getNetname(item.items);
 
 	item.ammo_shells = self.ammo_shells;
 	item.ammo_nails = self.ammo_nails;

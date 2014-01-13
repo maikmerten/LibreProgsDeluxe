@@ -5,6 +5,7 @@ subs.qc
 fight.qc
 ai.qc
 combat.qc
+helpers/netnames.qc	//gnounc
 items.qc
 weapons.qc
 world.qc
