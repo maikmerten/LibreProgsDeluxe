@@ -830,7 +830,7 @@ void() W_SetCurrentAmmo =
 	else
 	{
 		self.currentammo = 0;
-		self.weaponmodel = "";
+		self.weaponmodel = string_null;
 	}
 };
 
@@ -841,7 +841,6 @@ float() W_BestWeapon =
 	it = self.items;
 
 	if (self.waterlevel <= 1 && self.ammo_cells >= 1 && (it & IT_LIGHTNING) )
-
 		return IT_LIGHTNING;
 	else if(self.ammo_nails >= 2 && (it & IT_SUPER_NAILGUN) )
 		return IT_SUPER_NAILGUN;

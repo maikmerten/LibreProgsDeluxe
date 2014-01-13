@@ -53,6 +53,15 @@ void() PlaceItem =
 {
 	local float	oldz;
 
+	//gnounc		--for any items that dont already set their netnames
+	if(self.netname == string_null)
+	{
+		if(self.items)
+			self.netname = getNetname(self.items);
+		if(self.weapon)
+			self.netname = getNetname(self.weapon);	
+	}
+
 	self.mdl = self.model;		// so it can be restored on respawn
 	self.flags = FL_ITEM;		// make extra wide
 	self.solid = SOLID_TRIGGER;
@@ -79,7 +88,6 @@ Sets the clipping size and plants the object on the floor
 ============*/
 void() StartItem =
 {
-	self.netname = getNetname(self.items);	//gnounc		--for any items that dont already set their netnames
 	self.nextthink = time + 0.2;	// items start after other solids
 	self.think = PlaceItem;
 };
@@ -166,7 +174,6 @@ void() item_health =
 	setsize (self, '0 0 0', '32 32 56');
 	StartItem ();
 };
-
 
 void() health_touch =
 {
@@ -594,7 +601,7 @@ void() weapon_nailgun =
 	precache_model ("progs/g_nail.mdl");
 	setmodel (self, "progs/g_nail.mdl");
 	self.weapon = IT_NAILGUN;
-	self.netname = "nailgun";
+	self.netname = "Nailgun";
 	self.touch = weapon_touch;
 	setsize (self, '-16 -16 0', '16 16 56');
 	StartItem ();
@@ -621,7 +628,7 @@ void() weapon_grenadelauncher =
 {
 	precache_model ("progs/g_rock.mdl");
 	setmodel (self, "progs/g_rock.mdl");
-	self.weapon = 3;
+	self.weapon = IT_GRENADE_LAUNCHER;
 	self.netname = "Grenade Launcher";
 	self.touch = weapon_touch;
 	setsize (self, '-16 -16 0', '16 16 56');
@@ -635,7 +642,7 @@ void() weapon_rocketlauncher =
 {
 	precache_model ("progs/g_rock2.mdl");
 	setmodel (self, "progs/g_rock2.mdl");
-	self.weapon = 3;
+	self.weapon = IT_ROCKET_LAUNCHER;
 	self.netname = "Rocket Launcher";
 	self.touch = weapon_touch;
 	setsize (self, '-16 -16 0', '16 16 56');
@@ -650,7 +657,7 @@ void() weapon_lightning =
 {
 	precache_model ("progs/g_light.mdl");
 	setmodel (self, "progs/g_light.mdl");
-	self.weapon = 3;
+	self.weapon = IT_LIGHTNING;
 	self.netname = "Thunderbolt";
 	self.touch = weapon_touch;
 	setsize (self, '-16 -16 0', '16 16 56');
@@ -1106,7 +1113,7 @@ void() sigil_touch =
 	self.solid = SOLID_NOT;
 	self.model = string_null;
 	serverflags = serverflags | (self.spawnflags & 15);
-	self.classname = "";		// so rune doors won't find it
+	self.classname = string_null;		// so rune doors won't find it
 	
 	activator = other;
 	SUB_UseTargets();				// fire all targets / killtargets
@@ -1329,13 +1336,15 @@ void() BackpackTouch =
  	sprint (other, "You get ");//Netquake does not support print_low
 
 	if (self.items)
+	{	
 		if ((other.items & self.items) == 0)
 		{
 			acount = 1;
 			sprint (other, "the ");
 			sprint (other, self.netname);
 		}
- 
+ 	}
+
 	// if the player was using his best weapon, change up to the new one if better          
 	stemp = self;
 	self = other;
@@ -1443,6 +1452,7 @@ void() DropBackpack =
 	item.origin = self.origin - '0 0 24';
 	
 	item.items = self.weapon;
+
 	//gnounc
 	item.netname = getNetname(item.items);
 

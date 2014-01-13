@@ -609,6 +609,9 @@ void() PutClientInServer =
 	spawn_tdeath (self.origin, self);
 	
 	stuffcmd(self, "-attack\n");            // Supa, prevent shooting after respawning in MP
+	
+	centerprint(self, getMapname(mapname));	//gnounc --thought it would be fun. I was at odds about adding an unexpected feature. I may remove it later
+
 };
 
 
@@ -671,7 +674,7 @@ void() NextLevel =
 {
 	local entity o;
 
-	if (nextmap != "")
+	if (nextmap != string_null)
 		return; // already done
 
 	if (mapname == "start")
@@ -1274,7 +1277,7 @@ void(entity targ, entity attacker) ClientObituary =
 {
 	local	float rnum;
 	local	string deathstring, deathstring2;
-	deathstring = deathstring2 = "";
+	deathstring = deathstring2 = string_null;
 	// From GPL QW source
 	local   float  attackerteam, targteam;	// gb
 	
@@ -1516,7 +1519,7 @@ void(entity targ, entity attacker) ClientObituary =
 
 			if (targ.deathtype == "falling")
 			{
-				targ.deathtype = "";
+				targ.deathtype = string_null;
 				bprint (" fell to his death\n");
 				return;
 			}

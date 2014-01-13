@@ -58,7 +58,7 @@ void() InitTrigger =
 	setmodel (self, self.model);	// set size and link into world
 	self.movetype = MOVETYPE_NONE;
 	self.modelindex = 0;
-	self.model = "";
+	self.model = string_null;
 };
 
 /*
@@ -254,7 +254,7 @@ void() SUB_UseTargets =
 //
 // print the message
 //
-	if (activator.classname == "player" && self.message != "")
+	if (activator.classname == "player" && self.message != string_null)
 	{
 		centerprint (activator, self.message);
 
@@ -265,7 +265,7 @@ void() SUB_UseTargets =
 //
 // kill the killtagets
 //
-	if (self.killtarget != "")
+	if (self.killtarget != string_null)
 	{
 		t = world;
 
@@ -283,7 +283,7 @@ void() SUB_UseTargets =
 //
 // fire targets
 //
-	if (self.target != "")
+	if (self.target != string_null)
 	{
 		act = activator;
 		t = world;
