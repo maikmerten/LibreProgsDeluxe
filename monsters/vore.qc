@@ -168,6 +168,7 @@ void() ShalMissile =
 	sound (self, CHAN_WEAPON, "shalrath/attack2.wav", 1, ATTN_NORM);
 
 	missile = spawn ();
+	missile.classname = "vore_ball";	//gnounc
 	missile.owner = self;
 
 	missile.solid = SOLID_BBOX;
@@ -267,6 +268,7 @@ void() monster_shalrath =
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 400;
+	self.max_health = 400;
 
 	self.th_stand = shal_stand;
 	self.th_walk = shal_walk1;

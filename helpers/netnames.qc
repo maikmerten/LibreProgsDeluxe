@@ -5,41 +5,41 @@ string getNetname(float item_number) =
 {//gnounc
 	switch(item_number) 
 	{
-		case 4096:
+		case IT_AXE:
 			return "Axe";
-		case 1:
+		case IT_SHOTGUN:
 			return "Shotgun";
-		case 2:
+		case IT_SUPER_SHOTGUN:
 			return "Super Shotgun";
-		case 4:
+		case IT_NAILGUN:
 			return "Nailgun";
-		case 8:
+		case IT_SUPER_NAILGUN:
 			return "Perforator";
-		case 16:
+		case IT_GRENADE_LAUNCHER:
 			return "Grenade Launcher";
-		case 32:
+		case IT_ROCKET_LAUNCHER:
 			return "Rocket Launcher";
-		case 64:
+		case IT_LIGHTNING:
 			return "Lightning Gun";
-		case 128:
+		case IT_EXTRA_WEAPON:
 			return "Extra Weapon";
-		case 256:
+		case IT_SHELLS:
 			return "Shells";
-		case 512:
+		case IT_NAILS:
 			return "Nails";
-		case 1024:
+		case IT_ROCKETS:
 			return "Rockets";
-		case 2048:
+		case IT_CELLS:
 			return "Cells";
-		case 8192:
+		case IT_ARMOR1:
 			return "Green Armor";
-		case 16384:
+		case IT_ARMOR2:
 			return "Yellow Armor";
-		case 32768:
+		case IT_ARMOR3:
 			return "Red Armor";
-		case 65536:
+		case IT_SUPERHEALTH:
 			return "Mega Health";
-		case 131072:
+		case IT_KEY1:
 		{	if (world.worldtype == 0)
 				return "Silver key";
 			if (world.worldtype == 1)
@@ -47,7 +47,7 @@ string getNetname(float item_number) =
 			if (world.worldtype == 2)
 				return "Silver keycard";
 		}
-		case 262144:
+		case IT_KEY2:
 		{	if (world.worldtype == 0)
 				return "Gold key";
 			if (world.worldtype == 1)
@@ -55,13 +55,13 @@ string getNetname(float item_number) =
 			if (world.worldtype == 2)
 				return "Gold keycard";
 		}
-		case 524288:
+		case IT_INVISIBILITY:
 			return "Ring of Shadows";
-		case 1048576:
+		case IT_INVULNERABILITY:
 			return "Pentagram of Protection";
-		case 2097152:
+		case IT_SUIT:
 			return "Biohazard Suit";
-		case 4194304:
+		case IT_QUAD:
 			return "Quad Damage";
 
 		default:
@@ -141,7 +141,116 @@ string getMapname(string m) =
 		case "end":
 			return "Shub-Niggurath's Pit";
 
+		case "dm1":
+			return "Place of two Deaths";
+		case "dm2":
+			return "Claustrophobopolis";
+		case "dm3":
+			return "The Abandoned Base";
+		case "dm4":
+			return "The Bad Place";
+		case "dm5":
+			return "The Cistern";
+		case "dm6":
+			return "The Dark Zone";
+
 		default:
+			return string_null;
+	}
+};
+
+float getAmmotypeByWeapon(float it_num)
+{
+	switch(it_num)
+	{
+		case IT_AXE:
+			return 0;
+		case IT_SHOTGUN:
+			return IT_SHELLS;
+		case IT_SUPER_SHOTGUN:
+			return IT_SHELLS;
+		case IT_NAILGUN:
+			return IT_NAILS;
+		case IT_SUPER_NAILGUN:
+			return IT_NAILS;
+		case IT_GRENADE_LAUNCHER:
+			return IT_ROCKETS;
+		case IT_ROCKET_LAUNCHER:
+			return IT_ROCKETS;
+		case IT_LIGHTNING:
+			return IT_CELLS;
+		default:
+			return IT_SHELLS;
+	}
+};
+
+string getModelByNum(float it_num)
+{
+	switch(it_num)
+	{
+		case IT_AXE:
+			return "progs/v_axe.mdl";
+		case IT_SHOTGUN:
+			return "progs/v_shot.mdl";
+		case IT_SUPER_SHOTGUN:
+			return "progs/v_shot2.mdl";
+		case IT_NAILGUN:
+			return "progs/v_nail.mdl";
+		case IT_SUPER_NAILGUN:
+			return "progs/v_nail2.mdl";
+		case IT_GRENADE_LAUNCHER:
+			return "progs/v_rock.mdl";
+		case IT_ROCKET_LAUNCHER:
+			return "progs/v_rock2.mdl";
+		case IT_LIGHTNING:
+			return "progs/v_light.mdl";
+		case IT_SHELLS:
+			return "maps/b_shell0.bsp";	//b_shell1.bsp is big shells.
+		case IT_NAILS:
+			return "maps/b_nail0.bsp";
+		case IT_ROCKETS:
+			return "maps/b_rock0.bsp";
+		case IT_CELLS:
+			return "maps/b_batt0.bsp";
+		case IT_ARMOR1:
+			return "progs/armor.mdl";
+		case IT_ARMOR2:
+			return "progs/armor.mdl";
+		case IT_ARMOR3:
+			return "progs/armor.mdl";
+		case IT_SUPERHEALTH:
+			return "maps/b_bh100.bsp";
+		case IT_KEY1:
+		{
+			if (world.worldtype == 0)
+				return "progs/w_s_key.mdl";
+
+			else if(world.worldtype == 1)
+				return "progs/m_s_key.mdl";
+
+			else if(world.worldtype == 2)
+				return "progs/b_s_key.mdl";
+		}
+		case IT_KEY2:
+		{
+			if (world.worldtype == 0)
+				return "progs/w_g_key.mdl";
+
+			else if(world.worldtype == 1)
+				return "progs/m_g_key.mdl";
+
+			else if(world.worldtype == 2)
+				return "progs/b_g_key.mdl";
+		}
+		case IT_INVISIBILITY:
+			return "progs/invisibl.mdl";
+		case IT_INVULNERABILITY:
+			return "progs/invulner.mdl";
+		case IT_SUIT:
+			return "progs/suit.mdl";
+		case IT_QUAD:
+			return "progs/quaddama.mdl";
+		default :
 			return string_null;
 	}
 };

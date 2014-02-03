@@ -91,7 +91,7 @@ void(float offset) hknight_shot =
 	vec_z = 0 - vec_z + (random() - 0.5)*0.1;
 	
 	launch_spike (org, vec);
-	newmis.classname = "knightspike";
+	newmis.classname = "knight_spike";		//changed it to be consistant --gnounc
 	setmodel (newmis, "progs/k_spike.mdl");
 	setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);		
 	newmis.velocity = vec*300;
@@ -463,6 +463,7 @@ void() monster_hell_knight =
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 250;
+	self.max_health = 250;
 
 	self.th_stand = hknight_stand1;
 	self.th_walk = hknight_walk1;

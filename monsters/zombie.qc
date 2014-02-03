@@ -187,6 +187,7 @@ void(vector st) ZombieFireGrenade =
 	sound (self, CHAN_WEAPON, "zombie/z_shot1.wav", 1, ATTN_NORM);
 
 	missile = spawn ();
+	missile.classname = "zombie_grenade";	//gnounc
 	missile.owner = self;
 	missile.movetype = MOVETYPE_BOUNCE;
 	missile.solid = SOLID_BBOX;
@@ -530,6 +531,7 @@ void() monster_zombie =
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 60;
+	self.max_health = 60;
 
 	self.th_stand = zombie_stand1;
 	self.th_walk = zombie_walk1;

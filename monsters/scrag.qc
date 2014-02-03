@@ -227,7 +227,7 @@ void() Wiz_FastFire =
 		launch_spike (self.origin, vec);
 		newmis.velocity = vec*600;
 		newmis.owner = self.owner;
-		newmis.classname = "wizspike";
+		newmis.classname = "wizard_spike";		//changed it to be consistant --gnounc
 		setmodel (newmis, "progs/w_spike.mdl");
 		setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);		
 	}
@@ -428,6 +428,7 @@ void() monster_wizard =
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 80;
+	self.max_health = 80;
 
 	self.th_stand = wiz_stand1;
 	self.th_walk = wiz_walk1;

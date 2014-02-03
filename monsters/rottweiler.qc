@@ -368,6 +368,7 @@ void() monster_dog =
 
 	setsize (self, '-32 -32 -24', '32 32 40');
 	self.health = 25;
+	self.max_health = 25;
 
 	self.th_stand = dog_stand1;
 	self.th_walk = dog_walk1;

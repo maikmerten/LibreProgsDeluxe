@@ -200,6 +200,7 @@ void() monster_fish =
 
 	setsize (self, '-16 -16 -24', '16 16 24');
 	self.health = 25;
+	self.max_health = 25;
 	
 	self.th_stand = f_stand1;
 	self.th_walk = f_walk1;

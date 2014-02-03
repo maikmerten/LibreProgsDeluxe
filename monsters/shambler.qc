@@ -413,6 +413,7 @@ void() monster_shambler =
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 600;
+	self.max_health = 600;
 
 	self.th_stand = sham_stand1;
 	self.th_walk = sham_walk1;

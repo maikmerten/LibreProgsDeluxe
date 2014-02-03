@@ -403,6 +403,7 @@ void() W_FireRocket =
 	missile.owner = self;
 	missile.movetype = MOVETYPE_FLYMISSILE;
 	missile.solid = SOLID_BBOX;
+	missile.classname = "missile";
 		
 	// set missile speed	
 	makevectors (self.v_angle);
@@ -654,6 +655,7 @@ void() W_FireSuperSpikes =
 	self.currentammo = self.ammo_nails = self.ammo_nails - 2;
 	dir = aim (self, 1000);
 	launch_spike (self.origin + '0 0 16', dir);
+	newmis.classname = "super_spike";	//so we know the difference --gnounc
 	newmis.touch = superspike_touch;
 	setmodel (newmis, "progs/s_spike.mdl");
 	setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);		
@@ -713,10 +715,10 @@ void() spike_touch =
 	{
 		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 		
-		if (self.classname == "wizspike")
+		if (self.classname == "wizard_spike")
 			WriteByte (MSG_BROADCAST, TE_WIZSPIKE);
 
-		else if (self.classname == "knightspike")
+		else if (self.classname == "knight_spike")
 			WriteByte (MSG_BROADCAST, TE_KNIGHTSPIKE);
 
 		else
@@ -853,14 +855,16 @@ float() W_BestWeapon =
 
 	return IT_AXE;
 };
-
-float() W_CheckNoAmmo =
+//gnounc
+//wanted to get rid of the horrible triple negative when reading the call to checkNoAmmo. 
+//also it was unclear what checkNoAmmo should return for no ammo
+float() W_hasNoAmmo =
 {
-	if (self.currentammo > 0)
-		return TRUE;
+	if (!self.currentammo)
+		return TRUE;	//player hasNoAmmo	--gnounc
 
 	if (self.weapon == IT_AXE)
-		return TRUE;
+		return FALSE;	//the axe doesnt need ammo. so we lie. Player Totally has ammo..Promise! --gnounc
 	
 	self.weapon = W_BestWeapon ();
 
@@ -890,7 +894,7 @@ void() W_Attack =
 {
 	local	float	r;
 
-	if (!W_CheckNoAmmo ())
+	if (W_hasNoAmmo())
 		return;
 
 	makevectors	(self.v_angle);		// calculate forward angle for velocity

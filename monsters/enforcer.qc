@@ -97,6 +97,7 @@ void(vector org, vector vec) LaunchLaser =
 	vec = normalize(vec);
 	
 	newmis = spawn();
+	newmis.classname = "enforcer_laser";	//gnounc
 	newmis.owner = self;
 	newmis.movetype = MOVETYPE_FLY;
 	newmis.solid = SOLID_BBOX;
@@ -379,6 +380,7 @@ void() monster_enforcer =
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 80;
+	self.max_health = 80;
 
 	self.th_stand = enf_stand1;
 	self.th_walk = enf_walk1;

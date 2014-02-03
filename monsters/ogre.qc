@@ -117,6 +117,7 @@ void() OgreFireGrenade =
 	sound (self, CHAN_WEAPON, "weapons/grenade.wav", 1, ATTN_NORM);
 
 	missile = spawn ();
+	missile.classname = "ogre_grenade";	//gnounc
 	missile.owner = self;
 	missile.movetype = MOVETYPE_BOUNCE;
 	missile.solid = SOLID_BBOX;
@@ -535,6 +536,7 @@ void() monster_ogre =
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 200;
+	self.max_health = 200;
 
 	self.th_stand = ogre_stand1;
 	self.th_walk = ogre_walk1;

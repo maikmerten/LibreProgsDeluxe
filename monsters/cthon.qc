@@ -243,6 +243,7 @@ void(vector p) boss_missile =
 	vec = normalize (d - org);
 
 	launch_spike (org, vec);
+	newmis.classname = "cthon_lavaball";
 	setmodel (newmis, "progs/lavaball.mdl");
 	newmis.avelocity = '200 100 300';
 	setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);		
