@@ -860,8 +860,8 @@ float() W_BestWeapon =
 //also it was unclear what checkNoAmmo should return for no ammo
 float() W_hasNoAmmo =
 {
-	if (!self.currentammo)
-		return TRUE;	//player hasNoAmmo	--gnounc
+	if (self.currentammo)
+		return FALSE;	//player has ammo	--gnounc
 
 	if (self.weapon == IT_AXE)
 		return FALSE;	//the axe doesnt need ammo. so we lie. Player Totally has ammo..Promise! --gnounc
@@ -871,8 +871,9 @@ float() W_hasNoAmmo =
 	W_SetCurrentAmmo ();
 	
 	// drop the weapon down
-	return FALSE;
+	return TRUE;
 };
+
 
 /*
 ============

@@ -1,4 +1,4 @@
-//call like getNetName(IT_ARMOR3); and it returns "Red ARmor"
+//call like getNetName(IT_ARMOR3); and it returns "Red Armor"
 //or getNetName(self.items) or getNetname(self.weapon)
 //called from dropBackpack() and startItem(). fills in any netnames that are missing. and overrides the others.
 string getNetname(float item_number) =
