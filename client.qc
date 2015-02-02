@@ -610,7 +610,9 @@ void() PutClientInServer =
 	
 	stuffcmd(self, "-attack\n");            // Supa, prevent shooting after respawning in MP
 	
-	centerprint(self, getMapname(mapname));	//gnounc --thought it would be fun. I was at odds about adding an unexpected feature. I may remove it later
+//	centerprint(self, getMapname(mapname));	//gnounc --thought it would be fun. I was at odds about adding an unexpected feature. I may remove it later
+	//BAM removed it later. --gnounc
+
 
 };
 

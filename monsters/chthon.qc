@@ -243,7 +243,7 @@ void(vector p) boss_missile =
 	vec = normalize (d - org);
 
 	launch_spike (org, vec);
-	newmis.classname = "cthon_lavaball";
+	newmis.classname = "chthon_lavaball";
 	setmodel (newmis, "progs/lavaball.mdl");
 	newmis.avelocity = '200 100 300';
 	setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);		
@@ -266,8 +266,8 @@ void() boss_awake =
 	setmodel (self, "progs/boss.mdl");
 
 	//gnounc
-	self.netname = "Cthon";
-	self.killstring = "Has Cthon ever really killed someone? -GNOUNC";
+	self.netname = "Chthon";
+	self.killstring = "Has Chthon ever really killed someone? -GNOUNC";
 
 	setsize (self, '-128 -128 -24', '128 128 256');
 	

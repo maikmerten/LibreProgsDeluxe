@@ -86,9 +86,9 @@ string getMapname(string m) =
 		case "e1m5":
 			return "Gloom Keep";
 		case "e1m6":
-			return "The Door to Cthon";
+			return "The Door to Chthon";
 		case "e1m7":
-			return "The House of Cthon";
+			return "The House of Chthon";
 		case "e1m8":
 			return "Ziggurat Vertigo";
 
