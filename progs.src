@@ -1,4 +1,4 @@
-../progs.dat
+./output/progs.dat
 
 defs.qc
 subs.qc
