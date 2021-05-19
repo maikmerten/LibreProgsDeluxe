@@ -34,3 +34,5 @@ monsters/rotfish.qc			// registered
 monsters/vore.qc			// registered
 monsters/enforcer.qc		// registered
 monsters/shub.qc			// registered
+
+deluxe/misc_model.qc
