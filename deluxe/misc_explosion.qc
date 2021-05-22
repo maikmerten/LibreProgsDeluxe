@@ -32,6 +32,11 @@ void() misc_explosion_use = {
         T_RadiusDamage(self, self, self.dmg, self);
     }
 
+    // call targets
+    if(self.target) {
+        SUB_UseTargets();
+    }
+
     local entity explosprite;
     explosprite = spawn();
     explosprite.owner = self;
@@ -47,7 +52,9 @@ void() misc_explosion_use = {
 
 /*QUAKED misc_explosion (0.9 0.6 0.3) (-8 -8 -8) (8 8 8) X X X X X X X X X X
 
+"delay"       delay for triggering targeted entities
 "dmg"         radius-damage to be inflicted
+"target"      targetname of other entities
 "targetname"  name to target entity with
 
 */
