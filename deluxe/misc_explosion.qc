@@ -34,6 +34,7 @@ void() misc_explosion_use = {
 
     // call targets
     if(self.target) {
+        activator = self;
         SUB_UseTargets();
     }
 
