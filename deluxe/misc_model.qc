@@ -45,10 +45,15 @@ void() misc_model_think = {
 {
     model({"mdl": mdl, "skin": skin, "frame": frame})
 }
+
+"frame"        model frame to be display
+"first_frame"  for animation: first frame
+"last_frame"   for animation: last frame
+"speed"        for animation: animation speed (frames per second)
+"skin"         model skin to be used
+
 */
 void() misc_model = {
-
-    // TODO: implement spawn flags
 
     precache_model(self.mdl);
     setmodel(self, self.mdl);
