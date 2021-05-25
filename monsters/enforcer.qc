@@ -341,7 +341,8 @@ void() enf_die =
 };
 
 
-/*QUAKED monster_enforcer (1 0 0) (-16 -16 -24) (16 16 40) Ambush*/
+/*QUAKED monster_enforcer (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+*/
 void() monster_enforcer =
 {
 	if (deathmatch)

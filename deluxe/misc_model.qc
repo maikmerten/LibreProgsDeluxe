@@ -41,11 +41,12 @@ void() misc_model_think = {
     self.nextthink = time + fabs(self.speed);
 }
 
-/*QUAKED misc_model (0 0.5 1) (-8 -8 -8) (8 8 8) X X X X X X X X X X
+/*QUAKED misc_model (0 0.5 1) (-8 -8 -8) (8 8 8)
 {
-    model({"mdl": mdl, "skin": skin, "frame": frame})
+    model({"path": mdl, "skin": skin, "frame": frame});
 }
 
+"mdl"          model file to be displayed
 "frame"        model frame to be display
 "first_frame"  for animation: first frame
 "last_frame"   for animation: last frame

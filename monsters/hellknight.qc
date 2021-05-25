@@ -425,7 +425,8 @@ void() hknight_melee =
 	}
 };
 
-/*QUAKED monster_hell_knight (1 0 0) (-16 -16 -24) (16 16 40) Ambush*/
+/*QUAKED monster_hell_knight (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+*/
 void() monster_hell_knight =
 {
 	if (deathmatch)

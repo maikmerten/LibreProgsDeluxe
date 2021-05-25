@@ -321,7 +321,8 @@ void() armor_touch =
 };
 
 
-/*QUAKED item_armor1 (0 .5 .8) (-16 -16 0) (16 16 32)*/
+/*QUAKED item_armor1 (0 .5 .8) (-16 -16 0) (16 16 32)
+*/
 
 void() item_armor1 =
 {
@@ -333,7 +334,8 @@ void() item_armor1 =
 	StartItem ();
 };
 
-/*QUAKED item_armor2 (0 .5 .8) (-16 -16 0) (16 16 32)*/
+/*QUAKED item_armor2 (0 .5 .8) (-16 -16 0) (16 16 32)
+*/
 
 void() item_armor2 =
 {
@@ -345,7 +347,8 @@ void() item_armor2 =
 	StartItem ();
 };
 
-/*QUAKED item_armorInv (0 .5 .8) (-16 -16 0) (16 16 32)*/
+/*QUAKED item_armorInv (0 .5 .8) (-16 -16 0) (16 16 32)
+*/
 
 void() item_armorInv =
 {
@@ -580,7 +583,8 @@ void() weapon_touch =
 };
 
 
-/*QUAKED weapon_supershotgun (0 .5 .8) (-16 -16 0) (16 16 32)*/
+/*QUAKED weapon_supershotgun (0 .5 .8) (-16 -16 0) (16 16 32)
+*/
 
 void() weapon_supershotgun =
 {
@@ -769,7 +773,8 @@ void() ammo_touch =
 
 float WEAPON_BIG2 = 1;
 
-/*QUAKED item_shells (0 .5 .8) (0 0 0) (32 32 32) big*/
+/*QUAKED item_shells (0 .5 .8) (0 0 0) (32 32 32) big
+*/
 
 void() item_shells =
 {
@@ -795,7 +800,8 @@ void() item_shells =
 	StartItem ();
 };
 
-/*QUAKED item_spikes (0 .5 .8) (0 0 0) (32 32 32) big*/
+/*QUAKED item_spikes (0 .5 .8) (0 0 0) (32 32 32) big
+*/
 
 void() item_spikes =
 {
@@ -821,7 +827,8 @@ void() item_spikes =
 	StartItem ();
 };
 
-/*QUAKED item_rockets (0 .5 .8) (0 0 0) (32 32 32) big*/
+/*QUAKED item_rockets (0 .5 .8) (0 0 0) (32 32 32) big
+*/
 
 void() item_rockets =
 {
@@ -848,7 +855,8 @@ void() item_rockets =
 };
 
 
-/*QUAKED item_cells (0 .5 .8) (0 0 0) (32 32 32) big*/
+/*QUAKED item_cells (0 .5 .8) (0 0 0) (32 32 32) big
+*/
 
 void() item_cells =
 {
@@ -876,7 +884,8 @@ void() item_cells =
 
 
 /*QUAKED item_weapon (0 .5 .8) (0 0 0) (32 32 32) shotgun rocket spikes big
-DO NOT USE THIS!!!! IT WILL BE REMOVED!*/
+DO NOT USE THIS!!!! IT WILL BE REMOVED!
+*/
 
 float WEAPON_SHOTGUN = 1;
 float WEAPON_ROCKET = 2;
@@ -1015,7 +1024,8 @@ worldtype to one of the
 following:
 0: medieval
 1: metal
-2: base*/
+2: base
+*/
 
 void() item_key1 =
 {
@@ -1055,7 +1065,8 @@ worldtype to one of the
 following:
 0: medieval
 1: metal
-2: base*/
+2: base
+*/
 
 void() item_key2 =
 {
