@@ -392,8 +392,10 @@ void() Wiz_Missile =
 	wiz_fast1();
 };
 
-/*
-	QUAKED monster_wizard (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+/*QUAKED monster_wizard (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+{
+	model({"path": "progs/wizard.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() monster_wizard =

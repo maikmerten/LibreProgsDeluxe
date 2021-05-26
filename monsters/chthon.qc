@@ -290,6 +290,9 @@ void() boss_awake =
 
 
 /*QUAKED monster_boss (1 0 0) (-128 -128 -24) (128 128 256)
+{
+	model({"path": "progs/boss.mdl", "skin": 0, "frame": 33});
+}
 */
 void() monster_boss =
 {
@@ -407,7 +410,8 @@ void() lightning_use =
 
 
 /*QUAKED event_lightning (0 1 1) (-16 -16 -16) (16 16 16)
-Just for boss level.*/
+Just for boss level.
+*/
 void() event_lightning =
 {
 	self.use = lightning_use;

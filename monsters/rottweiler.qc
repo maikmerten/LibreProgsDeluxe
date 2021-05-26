@@ -340,6 +340,9 @@ float()	DogCheckAttack =
 //===========================================================================
 
 /*QUAKED monster_dog (1 0 0) (-32 -32 -24) (32 32 40) Ambush
+{
+	model({"path": "progs/dog.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_dog =
 {

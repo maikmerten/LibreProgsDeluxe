@@ -342,6 +342,9 @@ void() enf_die =
 
 
 /*QUAKED monster_enforcer (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+{
+	model({"path": "progs/enforcer.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_enforcer =
 {

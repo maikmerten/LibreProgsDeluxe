@@ -202,6 +202,9 @@ void()	tbaby_die2	=[	$exp,		tbaby_run1	]
 
 
 /*QUAKED monster_tarbaby (1 0 0) (-16 -16 -24) (16 16 24) Ambush
+{
+	model({"path": "progs/tarbaby.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_tarbaby =
 {

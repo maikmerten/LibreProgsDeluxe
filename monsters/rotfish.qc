@@ -174,6 +174,9 @@ void(entity attacker, float damage)	fish_pain =
 
 
 /*QUAKED monster_fish (1 0 0) (-16 -16 -24) (16 16 24) Ambush
+{
+	model({"path": "progs/fish.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_fish =
 {

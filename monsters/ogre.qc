@@ -502,7 +502,9 @@ void() ogre_melee =
 
 
 /*QUAKED monster_ogre (1 0 0) (-32 -32 -24) (32 32 64) Ambush
-
+{
+	model({"path": "progs/ogre.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_ogre =
 {

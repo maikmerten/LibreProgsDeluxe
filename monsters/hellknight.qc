@@ -426,6 +426,9 @@ void() hknight_melee =
 };
 
 /*QUAKED monster_hell_knight (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+{
+	model({"path": "progs/hknight.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_hell_knight =
 {

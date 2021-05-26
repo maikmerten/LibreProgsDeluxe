@@ -236,6 +236,9 @@ void() ShalMissileTouch =
 //=================================================================
 
 /*QUAKED monster_shalrath (1 0 0) (-32 -32 -24) (32 32 48) Ambush
+{
+	model({"path": "progs/shalrath.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_shalrath =
 {

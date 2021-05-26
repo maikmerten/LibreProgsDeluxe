@@ -284,6 +284,9 @@ void() army_die =
 
 
 /*QUAKED monster_army (1 0 0) (-16 -16 -24) (16 16 40) Ambush
+{
+	model({"path": "progs/soldier.mdl", "skin": 0, "frame": 0});
+}
 */
 void() monster_army =
 {	
