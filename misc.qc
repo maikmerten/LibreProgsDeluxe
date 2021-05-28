@@ -137,9 +137,13 @@ void() FireAmbient =
 };
 
 /*QUAKED light_torch_small_walltorch (0 .5 0) (-10 -10 -20) (10 10 20)
+{
+    model({"path": "progs/flame.mdl", "skin": 0, "frame": 0});
+}
 Short wall torch
 Default light value is 200
-Default style is 0*/
+Default style is 0
+*/
 void() light_torch_small_walltorch =
 {
 	precache_model ("progs/flame.mdl");
@@ -149,7 +153,11 @@ void() light_torch_small_walltorch =
 };
 
 /*QUAKED light_flame_large_yellow (0 1 0) (-10 -10 -12) (12 12 18)
-Large yellow flame ball*/
+{
+    model({"path": "progs/flame2.mdl", "skin": 0, "frame": 1});
+}
+Large yellow flame ball
+*/
 void() light_flame_large_yellow =
 {
 	precache_model ("progs/flame2.mdl");
@@ -160,7 +168,11 @@ void() light_flame_large_yellow =
 };
 
 /*QUAKED light_flame_small_yellow (0 1 0) (-8 -8 -8) (8 8 8) START_OFF
-Small yellow flame ball*/
+{
+    model({"path": "progs/flame2.mdl", "skin": 0, "frame": 0});
+}
+Small yellow flame ball
+*/
 void() light_flame_small_yellow =
 {
 	precache_model ("progs/flame2.mdl");
@@ -170,7 +182,11 @@ void() light_flame_small_yellow =
 };
 
 /*QUAKED light_flame_small_white (0 1 0) (-10 -10 -40) (10 10 40) START_OFF
-Small white flame ball*/
+{
+    model({"path": "progs/flame2.mdl", "skin": 0, "frame": 0});
+}
+Small white flame ball
+*/
 void() light_flame_small_white =
 {
 	precache_model ("progs/flame2.mdl");
@@ -183,7 +199,8 @@ void() light_flame_small_white =
 
 
 /*QUAKED misc_fireball (0 .5 .8) (-8 -8 -8) (8 8 8)
-Lava Balls*/
+Lava Balls
+*/
 
 void() fire_fly;
 void() fire_touch;
@@ -255,7 +272,8 @@ void() barrel_explode =
 
 
 /*QUAKED misc_explobox (0 .5 .8) (0 0 0) (32 32 64)
-TESTING THING*/
+TESTING THING
+*/
 
 void() misc_explobox =
 {
@@ -291,7 +309,8 @@ void() misc_explobox =
 
 
 /*QUAKED misc_explobox2 (0 .5 .8) (0 0 0) (32 32 64)
-Smaller exploding box, REGISTERED ONLY*/
+Smaller exploding box, REGISTERED ONLY
+*/
 
 void() misc_explobox2 =
 {
@@ -359,7 +378,8 @@ void() shooter_think =
 
 /*QUAKED trap_spikeshooter (0 .5 .8) (-8 -8 -8) (8 8 8) superspike laser
 When triggered, fires a spike in the direction set in QuakeEd.
-Laser is only for REGISTERED.*/
+Laser is only for REGISTERED.
+*/
 
 void() trap_spikeshooter =
 {
@@ -556,7 +576,8 @@ void() func_wall_use =
 };
 
 /*QUAKED func_wall (0 .5 .8) ?
-This is just a solid wall if not inhibitted*/
+This is just a solid wall if not inhibitted
+*/
 void() func_wall =
 {
 	self.angles = '0 0 0';
@@ -568,7 +589,8 @@ void() func_wall =
 
 
 /*QUAKED func_illusionary (0 .5 .8) ?
-A simple entity that looks solid but lets you walk through it.*/
+A simple entity that looks solid but lets you walk through it.
+*/
 void() func_illusionary =
 {
 	self.angles = '0 0 0';
@@ -579,7 +601,8 @@ void() func_illusionary =
 };
 
 /*QUAKED func_episodegate (0 .5 .8) ? E1 E2 E3 E4
-This bmodel will appear if the episode has allready been completed, so players can't reenter it.*/
+This bmodel will appear if the episode has allready been completed, so players can't reenter it.
+*/
 void() func_episodegate =
 {
 	if (!(serverflags & self.spawnflags))
@@ -593,7 +616,8 @@ void() func_episodegate =
 };
 
 /*QUAKED func_bossgate (0 .5 .8) ?
-This bmodel appears unless players have all of the episode sigils.*/
+This bmodel appears unless players have all of the episode sigils.
+*/
 void() func_bossgate =
 {
 	if ( (serverflags & 15) == 15)
