@@ -123,6 +123,9 @@ float (entity e, float healamount, float ignore) T_Heal =
 };
 
 /*QUAKED item_health (.3 .3 1) (0 0 0) (32 32 32) rotten megahealth
+{
+    model({"path": "maps/b_bh10.bsp", "skin": 0, "frame": 0});
+}
 Health box. Normally gives 25 points.
 Rotten box heals 5-10 points,
 megahealth will add 100 health, then 
@@ -322,6 +325,9 @@ void() armor_touch =
 
 
 /*QUAKED item_armor1 (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/armor.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() item_armor1 =
@@ -335,6 +341,9 @@ void() item_armor1 =
 };
 
 /*QUAKED item_armor2 (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/armor.mdl", "skin": 1, "frame": 0});
+}
 */
 
 void() item_armor2 =
@@ -348,6 +357,9 @@ void() item_armor2 =
 };
 
 /*QUAKED item_armorInv (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/armor.mdl", "skin": 2, "frame": 0});
+}
 */
 
 void() item_armorInv =
@@ -584,6 +596,9 @@ void() weapon_touch =
 
 
 /*QUAKED weapon_supershotgun (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/g_shot.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() weapon_supershotgun =
@@ -598,6 +613,9 @@ void() weapon_supershotgun =
 };
 
 /*QUAKED weapon_nailgun (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/g_nail.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() weapon_nailgun =
@@ -612,6 +630,9 @@ void() weapon_nailgun =
 };
 
 /*QUAKED weapon_supernailgun (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/g_nail2.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() weapon_supernailgun =
@@ -626,6 +647,9 @@ void() weapon_supernailgun =
 };
 
 /*QUAKED weapon_grenadelauncher (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/g_rock.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() weapon_grenadelauncher =
@@ -640,6 +664,9 @@ void() weapon_grenadelauncher =
 };
 
 /*QUAKED weapon_rocketlauncher (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/g_rock2.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() weapon_rocketlauncher =
@@ -655,6 +682,9 @@ void() weapon_rocketlauncher =
 
 
 /*QUAKED weapon_lightning (0 .5 .8) (-16 -16 0) (16 16 32)
+{
+    model({"path": "progs/g_light.mdl", "skin": 0, "frame": 0});
+}
 */
 
 void() weapon_lightning =
@@ -774,6 +804,9 @@ void() ammo_touch =
 float WEAPON_BIG2 = 1;
 
 /*QUAKED item_shells (0 .5 .8) (0 0 0) (32 32 32) big
+{
+    model({"path": "maps/b_shell1.bsp", "skin": 0, "frame": 0});
+}
 */
 
 void() item_shells =
@@ -801,6 +834,9 @@ void() item_shells =
 };
 
 /*QUAKED item_spikes (0 .5 .8) (0 0 0) (32 32 32) big
+{
+    model({"path": "maps/b_nail1.bsp", "skin": 0, "frame": 0});
+}
 */
 
 void() item_spikes =
@@ -828,6 +864,9 @@ void() item_spikes =
 };
 
 /*QUAKED item_rockets (0 .5 .8) (0 0 0) (32 32 32) big
+{
+    model({"path": "maps/b_rock1.bsp", "skin": 0, "frame": 0});
+}
 */
 
 void() item_rockets =
@@ -856,6 +895,9 @@ void() item_rockets =
 
 
 /*QUAKED item_cells (0 .5 .8) (0 0 0) (32 32 32) big
+{
+    model({"path": "maps/b_batt1.bsp", "skin": 0, "frame": 0});
+}
 */
 
 void() item_cells =
@@ -1017,6 +1059,9 @@ void() key_setsounds =
 };
 
 /*QUAKED item_key1 (0 .5 .8) (-16 -16 -24) (16 16 32)
+{
+    model({"path": "progs/w_s_key.mdl", "skin": 0, "frame": 0});
+}
 SILVER key
 In order for keys to work
 you MUST set your maps
@@ -1058,6 +1103,9 @@ void() item_key1 =
 };
 
 /*QUAKED item_key2 (0 .5 .8) (-16 -16 -24) (16 16 32)
+{
+    model({"path": "progs/w_g_key.mdl", "skin": 0, "frame": 0});
+}
 GOLD key
 In order for keys to work
 you MUST set your maps
@@ -1132,6 +1180,9 @@ void() sigil_touch =
 
 
 /*QUAKED item_sigil (0 .5 .8) (-16 -16 -24) (16 16 32) E1 E2 E3 E4
+{
+    model({"path": "progs/end1.mdl", "skin": 0, "frame": 0});
+}
 End of level sigil, pick up to end episode and return to jrstart.
 */
 
@@ -1246,7 +1297,11 @@ void() powerup_touch =
 
 
 /*QUAKED item_artifact_invulnerability (0 .5 .8) (-16 -16 -24) (16 16 32)
-Player is invulnerable for 30 seconds*/
+{
+    model({"path": "progs/invulner.mdl", "skin": 0, "frame": 0});
+}
+Player is invulnerable for 30 seconds
+*/
 void() item_artifact_invulnerability =
 {
 	self.touch = powerup_touch;
@@ -1264,7 +1319,11 @@ void() item_artifact_invulnerability =
 };
 
 /*QUAKED item_artifact_envirosuit (0 .5 .8) (-16 -16 -24) (16 16 32)
-Player takes no damage from water or slime for 30 seconds*/
+{
+    model({"path": "progs/suit.mdl", "skin": 0, "frame": 0});
+}
+Player takes no damage from water or slime for 30 seconds
+*/
 void() item_artifact_envirosuit =
 {
 	self.touch = powerup_touch;
@@ -1282,7 +1341,11 @@ void() item_artifact_envirosuit =
 
 
 /*QUAKED item_artifact_invisibility (0 .5 .8) (-16 -16 -24) (16 16 32)
-Player is invisible for 30 seconds*/
+{
+    model({"path": "progs/invisibl.mdl", "skin": 0, "frame": 0});
+}
+Player is invisible for 30 seconds
+*/
 void() item_artifact_invisibility =
 {
 	self.touch = powerup_touch;
@@ -1301,7 +1364,11 @@ void() item_artifact_invisibility =
 
 
 /*QUAKED item_artifact_super_damage (0 .5 .8) (-16 -16 -24) (16 16 32)
-The next attack from the player will do 4x damage*/
+{
+    model({"path": "progs/quaddama.mdl", "skin": 0, "frame": 0});
+}
+The next attack from the player will do 4x damage
+*/
 void() item_artifact_super_damage =
 {
 	self.touch = powerup_touch;
