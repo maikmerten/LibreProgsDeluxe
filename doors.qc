@@ -452,7 +452,8 @@ Key doors are allways wait -1.
 1)	stone
 2)	base
 3)	stone chain
-4)	screechy metal*/
+4)	screechy metal
+*/
 
 void() func_door =
 {
@@ -766,7 +767,8 @@ If a secret door has a targetname, it will only be opened by it's botton or trig
 "sounds"
 1) medieval
 2) metal
-3) base*/
+3) base
+*/
 
 void () func_door_secret =
 {

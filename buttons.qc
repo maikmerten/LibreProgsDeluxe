@@ -101,7 +101,8 @@ When a button is touched, it moves some distance in the direction of it's angle,
 0) steam metal
 1) wooden clunk
 2) metallic click
-3) in-out*/
+3) in-out
+*/
 void() func_button =
 {
 	if (self.sounds == 0)
