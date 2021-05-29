@@ -39,10 +39,10 @@ void() misc_lighttrain = {
         objerror("No target given for misc_lighttrain");
     }
 
-	self.solid = SOLID_NOT;
-	self.movetype = MOVETYPE_PUSH;
-	self.blocked = SUB_Null;
-	self.use = SUB_Null;
+    self.solid = SOLID_NOT;
+    self.movetype = MOVETYPE_PUSH;
+    self.blocked = SUB_Null;
+    self.use = SUB_Null;
     if(self.spawnflags & 1) {
         self.effects |= EF_BRIGHTLIGHT;
     } else {
@@ -50,13 +50,13 @@ void() misc_lighttrain = {
     }
 
     precache_sound("misc/null.wav");
-	self.noise = "misc/null.wav";
-	self.noise1 = "misc/null.wav";
+    self.noise = "misc/null.wav";
+    self.noise1 = "misc/null.wav";
 
-	precache_model(self.mdl);
-	setmodel(self, self.mdl);
+    precache_model(self.mdl);
+    setmodel(self, self.mdl);
     setsize(self, '0 0 0', '0 0 0');
 
-	self.nextthink = self.ltime + 0.1;
-	self.think = func_train_find;
+    self.nextthink = self.ltime + 0.1;
+    self.think = func_train_find;
 }
