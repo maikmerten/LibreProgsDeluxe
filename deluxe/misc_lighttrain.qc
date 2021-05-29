@@ -54,7 +54,8 @@ void() misc_lighttrain = {
 	self.noise1 = "misc/null.wav";
 
 	precache_model(self.mdl);
-	setmodel (self, self.mdl);
+	setmodel(self, self.mdl);
+    setsize(self, '0 0 0', '0 0 0');
 
 	self.nextthink = self.ltime + 0.1;
 	self.think = func_train_find;
