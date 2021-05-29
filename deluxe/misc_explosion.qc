@@ -51,7 +51,7 @@ void() misc_explosion_use = {
 }
 
 
-/*QUAKED misc_explosion (0.9 0.6 0.3) (-8 -8 -8) (8 8 8) X X X X X X X X X X
+/*QUAKED misc_explosion (0.9 0.6 0.3) (-8 -8 -8) (8 8 8)
 
 "delay"       delay for triggering targeted entities
 "dmg"         radius-damage to be inflicted
