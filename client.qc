@@ -627,6 +627,9 @@ void() PutClientInServer =
 
 
 /*QUAKED info_player_start (1 0 0) (-16 -16 -24) (16 16 24)
+{
+    model({"path": "progs/player.mdl", "skin": 0, "frame": 0});
+}
 The normal starting point for a level.
 */
 void() info_player_start =
@@ -635,6 +638,9 @@ void() info_player_start =
 
 
 /*QUAKED info_player_start2 (1 0 0) (-16 -16 -24) (16 16 24)
+{
+    model({"path": "progs/player.mdl", "skin": 0, "frame": 0});
+}
 Only used on start map for the return point from an episode.
 */
 void() info_player_start2 =
@@ -650,6 +656,9 @@ void() testplayerstart =
 };
 
 /*QUAKED info_player_deathmatch (1 0 1) (-16 -16 -24) (16 16 24)
+{
+    model({"path": "progs/player.mdl", "skin": 0, "frame": 0});
+}
 potential spawning position for deathmatch games
 */
 void() info_player_deathmatch =
@@ -657,6 +666,9 @@ void() info_player_deathmatch =
 };
 
 /*QUAKED info_player_coop (1 0 1) (-16 -16 -24) (16 16 24)
+{
+    model({"path": "progs/player.mdl", "skin": 0, "frame": 0});
+}
 potential spawning position for coop games
 */
 void() info_player_coop =
