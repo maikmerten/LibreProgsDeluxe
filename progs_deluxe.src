@@ -37,3 +37,4 @@ monsters/shub.qc			// registered
 
 deluxe/misc_model.qc
 deluxe/misc_explosion.qc
+deluxe/misc_lighttrain.qc
