@@ -22,11 +22,16 @@
 
 A dynamic light travelling along a path
 
-"speed"       travel-speed (100 if not set)
-"target"      targetname of first path node
-"mdl"         path to model
+"speed"        travel-speed (100 if not set)
+"target"       targetname of first path node
+"mdl"          path to model
+"first_frame"  for animation: first frame
+"last_frame"   for animation: last frame
+
 */
 void() misc_lighttrain = {
+    local entity anim_controller;
+    
     if(!self.speed) {
         self.speed = 100;
     }
@@ -57,6 +62,12 @@ void() misc_lighttrain = {
     setmodel(self, self.mdl);
     setsize(self, '0 0 0', '0 0 0');
 
+    if(self.last_frame) {
+        // if there is an animation frame range, start animation
+        anim_controller = spawn();
+        controller_animation_setup(anim_controller, self, 10);
+    }
+
     self.nextthink = self.ltime + 0.1;
     self.think = func_train_find;
-}
+};
