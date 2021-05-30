@@ -17,30 +17,6 @@
     See file, 'COPYING', for details.
 */
 
-
-.float first_frame;
-.float last_frame;
-
-
-void() misc_model_think = {
-    float nextframe = self.frame;
-
-    if(self.speed > 0) {
-        nextframe++;
-    } else {
-        nextframe--;
-    }
-
-    if(nextframe > self.last_frame) {
-        nextframe = self.first_frame;
-    } else if(nextframe < self.first_frame) {
-        nextframe = self.last_frame;
-    }
-
-    self.frame = nextframe;
-    self.nextthink = time + fabs(self.speed);
-}
-
 /*QUAKED misc_model (0 0.5 1) (-8 -8 -8) (8 8 8)
 {
     model({"path": mdl, "skin": skin, "frame": frame});
@@ -75,10 +51,7 @@ void() misc_model = {
         self.speed = 10;
     }
 
-    // compute time between thinks: (1 / framerate)
-    self.speed = 1 / self.speed;
-
-
-    self.think = misc_model_think;
-    self.nextthink = time;
+    // start animation, entity is its own controller
+    controller_animation_setup(self, self, self.speed);
+   
 }

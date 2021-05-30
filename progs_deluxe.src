@@ -35,6 +35,7 @@ monsters/vore.qc			// registered
 monsters/enforcer.qc		// registered
 monsters/shub.qc			// registered
 
+deluxe/common.qc
 deluxe/misc_model.qc
 deluxe/misc_explosion.qc
 deluxe/misc_lighttrain.qc
