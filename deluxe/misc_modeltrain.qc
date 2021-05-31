@@ -18,7 +18,7 @@
 */
 
 
-/*QUAKED misc_lighttrain (0 1 0) (-8 -8 -8) (8 8 8) BRIGHT
+/*QUAKED misc_modeltrain (0 1 0) (-8 -8 -8) (8 8 8) LIGHT BRIGHTLIGHT
 {
     model({"path": mdl, "skin": 0, "frame": first_frame});
 }
@@ -32,7 +32,7 @@ A dynamic light travelling along a path
 "last_frame"   for animation: last frame
 
 */
-void() misc_lighttrain = {
+void() misc_modeltrain = {
     local entity anim_controller;
     
     if(!self.speed) {
@@ -51,9 +51,9 @@ void() misc_lighttrain = {
     self.movetype = MOVETYPE_PUSH;
     self.blocked = SUB_Null;
     self.use = SUB_Null;
-    if(self.spawnflags & 1) {
+    if(self.spawnflags & 2) {
         self.effects |= EF_BRIGHTLIGHT;
-    } else {
+    } else if(self.spawnflags & 1) {
         self.effects |= EF_DIMLIGHT;
     }
 
