@@ -44,7 +44,7 @@ void() misc_modeltrain = {
     }
 
     if(!self.target) {
-        objerror("No target given for misc_lighttrain");
+        objerror("No target given for misc_modeltrain");
     }
 
     self.solid = SOLID_NOT;
