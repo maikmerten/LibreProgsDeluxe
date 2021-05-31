@@ -22,13 +22,24 @@
 .float first_frame;
 .float last_frame;
 
+.entity owned_ent;
+
 // ###############################################
 // Animation controller
 // ###############################################
 
 void() controller_animation_think = {
-    local entity o = self.owner;
-    local float nextframe = o.frame;
+    local entity o;
+    local float nextframe;
+
+    if(self.health < 0) {
+        SUB_Remove();
+        return;
+    }
+
+    o = self.owner;
+    nextframe = o.frame;
+
 
     if(self.speed > 0) {
         nextframe++;
@@ -65,6 +76,7 @@ void() modeltrain_setup;
 
 void() modeltrain_next = {
     local entity targ;
+    local entity oldself;
     targ = self.goalentity;
 
     // we arrived at current target. If the target
@@ -74,9 +86,15 @@ void() modeltrain_next = {
     }
     
     if(!targ.target) {
-        // if there's no next target, reset to first train target
-        self.think = modeltrain_setup;
-        self.nextthink = time + 0.1;
+        // if there's no next target, remove train
+        if(self.owned_ent) {
+            // ensure owned controllers get destroyed, too
+            oldself = self;
+            self = self.owned_ent;
+            SUB_Remove();
+            self = oldself;
+        }
+        SUB_Remove();
         return;
     }
 

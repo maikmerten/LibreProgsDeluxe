@@ -64,6 +64,7 @@ void() misc_modeltrain = {
     if(self.last_frame) {
         // if there is an animation frame range, start animation
         anim_controller = spawn();
+        self.owned_ent = anim_controller;
         controller_animation_setup(anim_controller, self, 10);
     }
 
