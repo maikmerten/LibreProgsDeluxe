@@ -19,6 +19,9 @@
 
 
 /*QUAKED misc_lighttrain (0 1 0) (-8 -8 -8) (8 8 8) BRIGHT
+{
+    model({"path": mdl, "skin": 0, "frame": first_frame});
+}
 
 A dynamic light travelling along a path
 
@@ -54,10 +57,6 @@ void() misc_lighttrain = {
         self.effects |= EF_DIMLIGHT;
     }
 
-    precache_sound("misc/null.wav");
-    self.noise = "misc/null.wav";
-    self.noise1 = "misc/null.wav";
-
     precache_model(self.mdl);
     setmodel(self, self.mdl);
     setsize(self, '0 0 0', '0 0 0');
@@ -68,6 +67,5 @@ void() misc_lighttrain = {
         controller_animation_setup(anim_controller, self, 10);
     }
 
-    self.nextthink = self.ltime + 0.1;
-    self.think = func_train_find;
+    modeltrain_setup();
 };
