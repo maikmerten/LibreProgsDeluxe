@@ -125,5 +125,5 @@ void() modeltrain_setup = {
     setorigin(self, targ.origin);
 
     self.think = modeltrain_next;
-    self.nextthink = time;
+    self.think();
 };

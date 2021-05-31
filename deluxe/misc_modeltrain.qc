@@ -18,29 +18,11 @@
 */
 
 
-/*QUAKED misc_modeltrain (0 1 0) (-8 -8 -8) (8 8 8) LIGHT BRIGHTLIGHT
-{
-    model({"path": mdl, "skin": 0, "frame": first_frame});
-}
-
-A dynamic light travelling along a path
-
-"speed"        travel-speed (100 if not set)
-"target"       targetname of first path node
-"mdl"          path to model
-"first_frame"  for animation: first frame
-"last_frame"   for animation: last frame
-
-*/
-void() misc_modeltrain = {
+void() misc_modeltrain_dolaunch = {
     local entity anim_controller;
     
     if(!self.speed) {
         self.speed = 100;
-    }
-
-    if(!self.mdl) {
-        self.mdl = "progs/s_light.spr";
     }
 
     if(!self.target) {
@@ -57,7 +39,6 @@ void() misc_modeltrain = {
         self.effects |= EF_DIMLIGHT;
     }
 
-    precache_model(self.mdl);
     setmodel(self, self.mdl);
     setsize(self, '0 0 0', '0 0 0');
 
@@ -70,3 +51,71 @@ void() misc_modeltrain = {
 
     modeltrain_setup();
 };
+
+
+/*QUAKED misc_modeltrain (0 1 0) (-8 -8 -8) (8 8 8) LIGHT BRIGHTLIGHT
+{
+    model({"path": mdl, "skin": 0, "frame": first_frame});
+}
+
+A model travelling along a path. Start travel directly after spawning.
+
+"speed"        travel-speed (100 if not set)
+"target"       targetname of first path node
+"mdl"          path to model
+"first_frame"  for animation: first frame
+"last_frame"   for animation: last frame
+
+*/
+void() misc_modeltrain = {
+    if(!self.mdl) {
+        self.mdl = "progs/s_light.spr";
+    }
+    precache_model(self.mdl);
+    misc_modeltrain_dolaunch();
+};
+
+
+/*QUAKED misc_modeltrain_launcher (0 1 0) (-8 -8 -8) (8 8 8) LIGHT BRIGHTLIGHT
+{
+    model({"path": mdl, "skin": 0, "frame": first_frame});
+}
+
+Creates a new model travelling along a path
+
+"speed"        travel-speed (100 if not set)
+"target"       targetname of first path node
+"targetname"   name to be targeted with
+"mdl"          path to model
+"first_frame"  for animation: first frame
+"last_frame"   for animation: last frame
+
+*/
+
+void() misc_modeltrain_launcher_use;
+void() misc_modeltrain_launcher = {
+    if(!self.mdl) {
+        self.mdl = "progs/s_light.spr";
+    }
+    precache_model(self.mdl);
+    self.use = misc_modeltrain_launcher_use;
+};
+
+void() misc_modeltrain_launcher_use = {
+    local entity newent;
+    local entity oldself;
+    oldself = self;
+
+    newent = spawn();
+    newent.origin = self.origin;
+    newent.spawnflags = self.spawnflags;
+    newent.speed = self.speed;
+    newent.target = self.target;
+    newent.mdl = self.mdl;
+    newent.first_frame = self.first_frame;
+    newent.last_frame = self.last_frame;
+
+    self = newent;
+    misc_modeltrain_dolaunch();
+    self = oldself;
+}
