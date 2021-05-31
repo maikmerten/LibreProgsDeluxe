@@ -76,7 +76,6 @@ void() modeltrain_setup;
 
 void() modeltrain_next = {
     local entity targ;
-    local entity oldself;
     targ = self.goalentity;
 
     // we arrived at current target. If the target
@@ -89,12 +88,9 @@ void() modeltrain_next = {
         // if there's no next target, remove train
         if(self.owned_ent) {
             // ensure owned controllers get destroyed, too
-            oldself = self;
-            self = self.owned_ent;
-            SUB_Remove();
-            self = oldself;
+            remove(self.owned_ent);
         }
-        SUB_Remove();
+        remove(self);
         return;
     }
 
