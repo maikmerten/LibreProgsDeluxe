@@ -18,7 +18,64 @@
 */
 
 
+// ###############################################
+// model trains (trains with angles adjusted to target)
+// ###############################################
+
+void() modeltrain_next = {
+    local entity targ;
+    targ = self.goalentity;
+
+    // we arrived at current target. If the target
+    // specifies a new speed, take it!
+    if(targ.speed) {
+        self.speed = fabs(targ.speed);
+    }
+
+    if(targ.spawnflags & 1) {
+        // KILLTRAIN spawnflag set
+        if(self.owned_ent) {
+            // ensure owned controllers get destroyed, too
+            remove(self.owned_ent);
+        }
+        remove(self);
+        return;
+    }
+
+    if(targ.spawnflags & 2) {
+        // STOPANIM spawnflag set
+        if(self.owned_ent) {
+            self.owned_ent.think = SUB_Null;
+        }
+    }
+
+    if(targ.spawnflags & 4) {
+        // SETFRAME spawnflag set
+        self.frame = targ.frame;
+    }
+    
+    if(!targ.target) {
+        // if there's no next target, stop train
+        return;
+    }
+
+    // find next target
+    targ = find(world, targetname, targ.target);
+    if(!targ) {
+        objerror("modeltrain_next: could not find next target");
+    }
+    self.goalentity = targ;
+
+    // orient towards new target
+    self.angles = vectoangles(targ.origin - self.origin);
+
+    // move towards new target
+    SUB_CalcMove(targ.origin, self.speed, modeltrain_next);
+};
+
+
 void() misc_modeltrain_dolaunch = {
+    local entity targ;
     local entity anim_controller;
     
     if(!self.speed) {
@@ -49,7 +106,31 @@ void() misc_modeltrain_dolaunch = {
         controller_animation_setup(anim_controller, self, 10);
     }
 
-    modeltrain_setup();
+    // find first path node
+    targ = find(world, targetname, self.target);
+    self.goalentity = targ;
+
+    // orient towards first target
+    self.angles = vectoangles(targ.origin - self.origin);
+
+    setorigin(self, targ.origin);
+
+    self.think = modeltrain_next;
+    self.think();
+};
+
+/*QUAKED path_corner_modeltrain (0.7 0.3 0) (-8 -8 -8) (8 8 8) KILLTRAIN STOPANIM SETFRAME
+
+A model travelling along a path. Start travel directly after spawning.
+
+"speed"        new speed for modeltrain arriving at this path node
+"target"       targetname of next path node
+"frame"        set model frame to this frame number (needs SETFRAME spawnflag, combine with STOPANIM)
+
+*/
+
+void() path_corner_modeltrain = {
+    self.classname = "path_corner_modeltrain";
 };
 
 
