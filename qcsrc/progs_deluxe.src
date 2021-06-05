@@ -1,0 +1,41 @@
+./output/progs.dat
+
+./qcsrc/defs.qc
+./qcsrc/subs.qc
+./qcsrc/fight.qc
+./qcsrc/ai.qc
+./qcsrc/combat.qc
+./qcsrc/helpers/netnames.qc	//gnounc
+./qcsrc/items.qc
+./qcsrc/weapons.qc
+./qcsrc/world.qc
+./qcsrc/client.qc
+./qcsrc/player.qc
+./qcsrc/monsters.qc
+./qcsrc/doors.qc
+./qcsrc/buttons.qc
+./qcsrc/triggers.qc
+./qcsrc/plats.qc
+./qcsrc/misc.qc
+
+./qcsrc/monsters/ogre.qc
+./qcsrc/monsters/fiend.qc
+./qcsrc/monsters/shambler.qc
+./qcsrc/monsters/knight.qc
+./qcsrc/monsters/grunt.qc
+./qcsrc/monsters/scrag.qc
+./qcsrc/monsters/rottweiler.qc
+./qcsrc/monsters/zombie.qc
+./qcsrc/monsters/chthon.qc
+
+./qcsrc/monsters/spawn.qc			// registered
+./qcsrc/monsters/hellknight.qc		// registered
+./qcsrc/monsters/rotfish.qc			// registered
+./qcsrc/monsters/vore.qc			// registered
+./qcsrc/monsters/enforcer.qc		// registered
+./qcsrc/monsters/shub.qc			// registered
+
+./qcsrc/deluxe/common.qc
+./qcsrc/deluxe/misc_model.qc
+./qcsrc/deluxe/misc_explosion.qc
+./qcsrc/deluxe/misc_modeltrain.qc
