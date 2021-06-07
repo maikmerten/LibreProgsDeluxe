@@ -39,3 +39,4 @@
 ./qcsrc/deluxe/misc_model.qc
 ./qcsrc/deluxe/misc_explosion.qc
 ./qcsrc/deluxe/misc_modeltrain.qc
+./qcsrc/deluxe/trigger_periodic.qc
