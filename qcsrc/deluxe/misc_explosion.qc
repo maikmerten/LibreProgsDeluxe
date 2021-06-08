@@ -33,7 +33,7 @@ void() misc_explosion_use = {
     }
 
     // call targets
-    if(self.target) {
+    if(self.target || self.killtarget) {
         activator = self;
         SUB_UseTargets();
     }
@@ -57,6 +57,7 @@ void() misc_explosion_use = {
 "dmg"         radius-damage to be inflicted
 "target"      targetname of other entities
 "targetname"  name to target entity with
+"killtarget"  targetname of entities to be removed on explosion
 
 */
 void() misc_explosion = {
