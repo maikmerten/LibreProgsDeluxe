@@ -576,7 +576,7 @@ void() PutClientInServer =
 	W_SetCurrentAmmo ();
 
 	self.attack_finished = time;
-	self.th_pain = player_pain;
+	self.th_pain = (void(entity attacker, float damage)) player_pain;
 	self.th_die = PlayerDie;
 	
 	self.deadflag = DEAD_NO;
