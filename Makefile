@@ -1,4 +1,4 @@
-QCC=fteqcc
+QCC=fteqcc -Wall
 DEFEXTRACT=java tools/QDefExtractor.java progs.src output/libreprogs.def
 
 all:

@@ -1541,7 +1541,8 @@ void(entity targ, entity attacker) ClientObituary =
 			}
 
 			//FIXME string_nul ??? maybe not necessary	//gnounc
-			if(attacker.killstring)
+			// yes, a null-check makes sense here       //SavageX
+			if(attacker.killstring != string_null)
 			{//gnounc
 				bprint (attacker.killstring);
 				return;
