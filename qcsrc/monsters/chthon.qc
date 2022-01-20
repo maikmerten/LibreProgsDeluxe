@@ -267,7 +267,7 @@ void() boss_awake =
 
 	//gnounc
 	self.netname = "Chthon";
-	self.killstring = "Has Chthon ever really killed someone? -GNOUNC";
+	//self.killstring = "Has Chthon ever really killed someone? -GNOUNC";
 
 	setsize (self, '-128 -128 -24', '128 128 256');
 	
