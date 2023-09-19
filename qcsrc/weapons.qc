@@ -440,6 +440,7 @@ void(vector p1, vector p2, entity from, float damage) LightningDamage =
 	local entity		e1, e2;
 	local vector		f;
 
+#define LIGHTNINGFIX
 #ifdef LIGHTNINGFIX
 	local float			tmp;
 	f = p2 - p1;
